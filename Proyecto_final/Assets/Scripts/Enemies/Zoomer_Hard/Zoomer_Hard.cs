@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class WallEnemyII : MonoBehaviour
+public class Zoomer_Hard : Enemy
 {
-    [SerializeField] float speed;
     [SerializeField] LayerMask floorLayer;
     [SerializeField] Transform rayCastDownLeft;
     [SerializeField] Transform rayCastDownRightOut;
@@ -32,24 +31,24 @@ public class WallEnemyII : MonoBehaviour
         RaycastHit2D hitDownRigthOut = Physics2D.Raycast(rayCastDownRightOut.position, -transform.up, 0.2f, floorLayer);
         RaycastHit2D hitDownRigthIn = Physics2D.Raycast(rayCastDownRightIn.position, -transform.up, 0.2f, floorLayer);
         RaycastHit2D hitDownLeft = Physics2D.Raycast(rayCastDownLeft.position, -transform.up, 0.2f, floorLayer);
-        RaycastHit2D hitDownRight = Physics2D.Raycast(rayCastRight.position, transform.right, 0.101f, floorLayer);
+        RaycastHit2D hitDownRight = Physics2D.Raycast(rayCastRight.position, transform.right, 0.105f, floorLayer);
 
         if (hitDownRight) {
-            changeRotation2();
-            changeDirection2();
+            changeRotationL();
+            changeDirectionL();
         }
 
         if (!hitDownLeft)
         {
             if (!hitDownRigthOut && !hitDownRigthIn) { 
-                changeRotation();
-                changeDirection();
+                changeRotationR();
+                changeDirectionR();
             }
         }
 
     }
     
-    void changeDirection()
+    void changeDirectionR()
     {
         if (direction == new Vector3(1, 0, 0))
         {
@@ -69,7 +68,7 @@ public class WallEnemyII : MonoBehaviour
         }
     }
 
-    void changeDirection2()
+    void changeDirectionL()
     {
         if (direction == new Vector3(1, 0, 0))
         {
@@ -89,7 +88,7 @@ public class WallEnemyII : MonoBehaviour
         }
     }
 
-    void changeRotation()
+    void changeRotationR()
     {
         if (direction == new Vector3(1, 0, 0))
         {
@@ -109,7 +108,7 @@ public class WallEnemyII : MonoBehaviour
         }
     }
 
-    void changeRotation2()
+    void changeRotationL()
     {
         if (direction == new Vector3(1, 0, 0))
         {
