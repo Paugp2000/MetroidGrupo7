@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1717209717943668524}
   - component: {fileID: 1761771316800177829}
   m_Layer: 0
-  m_Name: Zoomer_Light_Right
+  m_Name: Zoomer_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

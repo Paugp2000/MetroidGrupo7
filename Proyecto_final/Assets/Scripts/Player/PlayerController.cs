@@ -124,6 +124,11 @@ public class PlayerController : MonoBehaviour
         rb2D.velocity = new Vector2((speed * (horizontalDirection/100 * 50)), rb2D.velocity.y);
         if (ToOnFloor())
             return;
+
+        if (jump_ia.WasReleasedThisFrame() && rb2D.velocity.y > 0) {
+            rb2D.velocity = new Vector2(rb2D.velocity.y, 0);
+        }
+
     }
     //======================================= STATES FUNCTIONS =======================================//
 

@@ -31,9 +31,9 @@ public class Zoomer_Light_Right : Enemy
         RaycastHit2D hitDownRigthOut = Physics2D.Raycast(rayCastDownRightOut.position, -transform.up, 0.2f, floorLayer);
         RaycastHit2D hitDownRigthIn = Physics2D.Raycast(rayCastDownRightIn.position, -transform.up, 0.2f, floorLayer);
         RaycastHit2D hitDownLeft = Physics2D.Raycast(rayCastDownLeft.position, -transform.up, 0.2f, floorLayer);
-        RaycastHit2D hitDownRight = Physics2D.Raycast(rayCastRight.position, transform.right, 0.105f, floorLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(rayCastRight.position, transform.right, 0.105f, floorLayer);
 
-        if (hitDownRight) {
+        if (hitRight) {
             changeRotationL();
             changeDirectionL();
         }
