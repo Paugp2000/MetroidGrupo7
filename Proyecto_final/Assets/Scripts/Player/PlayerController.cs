@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb2D;
     //==========END RIGIDBODY==========//
 
+    Animator anim;
 
 
     //============MOVEMENT===========\\
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
         inputActionsMapping.Enable();
         horizontal_ia = inputActionsMapping.FindActionMap("Movement").FindAction("Horizontal");
         jump_ia = inputActionsMapping.FindActionMap("Movement").FindAction("Jump");
+        anim = GetComponent<Animator>();
 
         rb2D = GetComponent<Rigidbody2D>();
     }
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour
         float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());
 
         rb2D.velocity = new Vector2(speed * horizontalDirection, rb2D.velocity.y);
+        anim.SetFloat("Run", Math.Abs(rb2D.velocity.magnitude));
 
         if (horizontalDirection > 0)
         {
@@ -121,6 +124,8 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());
 
+        anim.SetBool("Salta", true);
+
         rb2D.velocity = new Vector2((speed * (horizontalDirection/100 * 50)), rb2D.velocity.y);
         if (ToOnFloor())
             return;
@@ -134,6 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         if (DetectFloor())
         {
+            anim.SetBool("Salta", false);
             return true;
         }
         return false;
