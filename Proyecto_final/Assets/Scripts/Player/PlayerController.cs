@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
     //============SPEEDS & FORCES===========\\
     [SerializeField]
     float speed, jumpImpulse;
@@ -20,6 +21,12 @@ public class PlayerController : MonoBehaviour
 
 
     //============MOVEMENT===========\\
+    [SerializeField]
+    float minJumpTime = 0.25f;
+    const float MIN_JUMP_TIME = 0.15f;
+
+    const int jumpMobilityPercet = 75;
+
     [SerializeField]
     public InputActionAsset inputActionsMapping;
 
@@ -92,18 +99,20 @@ public class PlayerController : MonoBehaviour
     //======================================= STATES FUNCTIONS =======================================\\
     void OnFloor()
     {
+        minJumpTime = MIN_JUMP_TIME;
+
         float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());
 
         rb2D.velocity = new Vector2(speed * horizontalDirection, rb2D.velocity.y);
 
         if (horizontalDirection > 0)
         {
-            transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+            transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
         }
 
         if (horizontalDirection < 0)
         {
-            transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
+            transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
         }
 
 
@@ -119,18 +128,23 @@ public class PlayerController : MonoBehaviour
 
     void OnAir()
     {
+        minJumpTime -= Time.deltaTime;
+
         float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());
 
-        rb2D.velocity = new Vector2((speed * (horizontalDirection/100 * 50)), rb2D.velocity.y);
+        rb2D.velocity = new Vector2((speed * (horizontalDirection/100 * jumpMobilityPercet)), rb2D.velocity.y);
         if (ToOnFloor())
             return;
 
-        if (jump_ia.WasReleasedThisFrame() && rb2D.velocity.y > 0) {
-            rb2D.velocity = new Vector2(rb2D.velocity.y, 0);
+        if (rb2D.velocity.y < 0)
+        { 
+        }
+        else if ((jump_ia.WasReleasedThisFrame() && rb2D.velocity.y > 0 && minJumpTime <= 0) || (minJumpTime <= 0 && !jump_ia.IsPressed())) {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
         }
 
     }
-    //======================================= STATES FUNCTIONS =======================================//
+    //======================================= END STATES FUNCTIONS =======================================//
 
 
 
