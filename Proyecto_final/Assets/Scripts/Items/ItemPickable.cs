@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemPickable : MonoBehaviour
 {
-    enum ITEM {ENERGI, MISSILE};
+    enum ITEM {ENERGY, MISSILE,};
 
     [SerializeField] ITEM item;
 
@@ -14,12 +14,11 @@ public class ItemPickable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Item Colisionado");
         if (collision.tag == "Player")
         {
             switch (item)
             {
-                case ITEM.ENERGI:
+                case ITEM.ENERGY:
                     GameManager.Instance.AddEnergy();
                     Destroy(gameObject);
                     break;

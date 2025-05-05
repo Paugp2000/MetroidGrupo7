@@ -55,16 +55,18 @@ public class Enemy : MonoBehaviour
 
     void DropItem()
     {
-        randomNumber = UnityEngine.Random.Range(1,3);   
+        randomNumber = UnityEngine.Random.Range(1,6);   
         switch (randomNumber)
         {
             case 1:
                 Instantiate(powerBeamPickeable, transform.position, powerBeamPickeable.transform.rotation);
-                Debug.Log("item 1 dropeado");
                 break;
             case 2:
-                Instantiate(missilePickeable, transform.position, missilePickeable.transform.rotation);
-                Debug.Log("item 2 dropeado");
+
+                if (GameManager.Instance.enableMissiles)
+                {
+                    Instantiate(missilePickeable, transform.position, missilePickeable.transform.rotation);
+                }
                 break;
 
         }
