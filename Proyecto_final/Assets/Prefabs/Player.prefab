@@ -25,12 +25,43 @@ Transform:
   m_GameObject: {fileID: 1246125730930219522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.805, y: 0.321, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2777104059626740686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1720882641689367646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5057015134799067970}
+  m_Layer: 0
+  m_Name: BulletTopSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5057015134799067970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720882641689367646}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.077, y: 1.452, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2777104059626740686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &3340398371457447520
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +160,7 @@ Transform:
   - {fileID: 3773903095581061857}
   - {fileID: 3121658329602140167}
   - {fileID: 666931068858184133}
+  - {fileID: 5057015134799067970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2846952614845815443
@@ -269,10 +301,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5.5
   jumpImpulse: 15
-  minJumpTime: 0.25
+  jumpTime: 0.25
   inputActionsMapping: {fileID: -944628639613478452, guid: 8f1f6496f58515046bf892c61e864296, type: 3}
   MapLayer:
     serializedVersion: 2
     m_Bits: 8
   LeftRaycastOrigin: {fileID: 3773903095581061857}
   RightRaycastOrigin: {fileID: 3121658329602140167}
+  CurrentState: 0
+  maxUntouchableTime: 0
+  Untouchable: 0
+  nextTransitionPosition: {x: 0, y: 0, z: 0}
+  transitionSpeed: 0

@@ -14,16 +14,18 @@ public class DoorsController : MonoBehaviour
         if(collision.tag == "Player")
         {
             Debug.Log("choca");
-            
-            if (CameraController.Instance.transform.position.x < transform.position.x) //if the camera is on the left side of the door, move it to the right side
+            if (CameraController.Instance.transform.position.x < transform.position.x) //if the camera is on the left side of the door, move it to the right side the camera and the player
             {
                 Debug.Log("to right");
                 //asign Y axis to the correct camera Y axis
                 CameraController.Instance.transform.position = new Vector3(CameraController.Instance.transform.position.x, nextCameraYCoordinate, CameraController.Instance.transform.position.z);
                 
+                PlayerController.Instance.nextTransitionPosition = transform.position + new Vector3(2.5f, 0, 0);
+                PlayerController.Instance.CurrentState = PlayerController.STATES.ON_TRANSITION_RIGHT;
+
                 if (toRightState == CameraController.STATES.HORIZONTAL) //if the camera is going to be on HORIZONTAL state, the next camera position is the position of the player + 2 units of margin
                 {
-                    CameraController.Instance.nextPosition = new Vector3(CameraController.Instance.target.transform.position.x + 2, CameraController.Instance.transform.position.y, CameraController.Instance.transform.position.z);
+                    CameraController.Instance.nextPosition = new Vector3(CameraController.Instance.target.transform.position.x + 4, CameraController.Instance.transform.position.y, CameraController.Instance.transform.position.z);
                 }
                 
                 else{ //else, the next camera position is going to be 8 units far of the door
@@ -42,9 +44,13 @@ public class DoorsController : MonoBehaviour
                 //it does the same of the previous if, but to the left
                 Debug.Log("to left");
                 CameraController.Instance.transform.position = new Vector3(CameraController.Instance.transform.position.x, nextCameraYCoordinate, CameraController.Instance.transform.position.z);
+
+                PlayerController.Instance.nextTransitionPosition = transform.position + new Vector3(-2.5f, 0, 0);
+                PlayerController.Instance.CurrentState = PlayerController.STATES.ON_TRANSITION_LEFT;
+
                 if (toLeftState == CameraController.STATES.HORIZONTAL)
                 {
-                    CameraController.Instance.nextPosition = new Vector3(CameraController.Instance.target.transform.position.x - 2, CameraController.Instance.transform.position.y, CameraController.Instance.transform.position.z);
+                    CameraController.Instance.nextPosition = new Vector3(CameraController.Instance.target.transform.position.x - 4, CameraController.Instance.transform.position.y, CameraController.Instance.transform.position.z);
                 }
 
                 else

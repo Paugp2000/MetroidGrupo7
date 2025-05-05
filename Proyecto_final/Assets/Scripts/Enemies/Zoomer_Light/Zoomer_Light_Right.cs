@@ -10,19 +10,27 @@ public class Zoomer_Light_Right : Enemy
     [SerializeField] Transform rayCastDownRightOut;
     [SerializeField] Transform rayCastDownRightIn;
     [SerializeField] Transform rayCastRight;
-    Rigidbody2D RbWE;
+    Rigidbody2D Rb2d;
     Vector3 direction;
 
     void Start()
     {
-        RbWE = GetComponent<Rigidbody2D>();
+        Rb2d = GetComponent<Rigidbody2D>();
         direction = transform.right;
     }
 
     void Update()
     {
         controlRaycast();
-        RbWE.velocity = direction * speed;
+
+        if (stunned)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        }
+        else
+        {
+            Rb2d.velocity = direction * speed;
+        }
 
     }
 
@@ -107,7 +115,6 @@ public class Zoomer_Light_Right : Enemy
             transform.rotation = Quaternion.AngleAxis(0, -transform.forward);
         }
     }
-
     void changeRotationL()
     {
         if (direction == new Vector3(1, 0, 0))

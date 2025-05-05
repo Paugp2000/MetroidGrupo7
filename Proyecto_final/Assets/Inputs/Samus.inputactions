@@ -81,6 +81,82 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Abilities",
+            "id": "cc2a5ece-6fea-4d37-8438-969692edf693",
+            "actions": [
+                {
+                    "name": "LightShoot",
+                    "type": "Button",
+                    "id": "01bcf215-5e0c-4ad0-b793-ae33054cb6c2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MissileShoot",
+                    "type": "Button",
+                    "id": "b0205885-58d7-4afe-bfec-82c89ad1f1bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ef9ddc47-bd37-481c-bf70-d42bf2a11fe3",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LightShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f86c5fd-aa0f-4b84-9412-dad86bfe702f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MissileShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pointing",
+            "id": "6c7d1896-5dec-4566-b2e7-87486039f649",
+            "actions": [
+                {
+                    "name": "Up",
+                    "type": "Value",
+                    "id": "27408ca3-cc17-4ef9-97bf-c999d5cc8d5a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5c307bad-a56a-4df6-925a-4f9503829a16",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

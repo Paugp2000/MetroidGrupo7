@@ -74,9 +74,10 @@ GameObject:
   - component: {fileID: 2197074638854168280}
   - component: {fileID: 1717209717943668524}
   - component: {fileID: 1761771316800177829}
+  - component: {fileID: 7418253406864017276}
   m_Layer: 0
   m_Name: Zoomer_Light
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,7 +193,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 2
-  speed: 2
+  speed: 2.5
+  damage: 8
+  powerBeamPickeable: {fileID: 6263134684158610267, guid: f7b3f39e95a33324884856e43ca640b5, type: 3}
+  missilePickeable: {fileID: 2224830809662790571, guid: ab5869f0c4145b5468904ecdc8287950, type: 3}
   floorLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -200,6 +204,51 @@ MonoBehaviour:
   rayCastDownRightOut: {fileID: 349025459147654160}
   rayCastDownRightIn: {fileID: 6579080135065386353}
   rayCastRight: {fileID: 9093959157777086241}
+--- !u!61 &7418253406864017276
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6807373545268414569}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.9375}
+    newSize: {x: 1, y: 0.9375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9375}
+  m_EdgeRadius: 0
 --- !u!1 &6999796921257636562
 GameObject:
   m_ObjectHideFlags: 0

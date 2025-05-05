@@ -8,4 +8,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected int damage;
     [SerializeField] protected float lifeTime;
 
+    private void Start()
+    {
+        GetComponent<Rigidbody2D>().velocity = transform.right * speed;
+        Destroy(gameObject, lifeTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
+    }
+
+
 }
