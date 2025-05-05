@@ -14,6 +14,7 @@ public class ItemPickable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Item Colisionado");
         if (collision.tag == "Player")
         {
             switch (item)

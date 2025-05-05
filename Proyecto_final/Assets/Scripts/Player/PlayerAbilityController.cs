@@ -41,6 +41,7 @@ public class PlayerAbilityController : MonoBehaviour
                 GameManager.Instance.missiles--;
                 if (pointingUp.ReadValue<float>() > 0)
                 {
+
                     Quaternion rotation = Quaternion.Euler(0, -180, 0);
                     Instantiate(missile, topShootPoint.position, topShootPoint.rotation);
                 }
