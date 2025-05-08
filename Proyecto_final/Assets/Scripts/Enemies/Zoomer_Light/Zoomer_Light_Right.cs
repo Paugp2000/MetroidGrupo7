@@ -26,6 +26,7 @@ public class Zoomer_Light_Right : Enemy
         if (stunned)
         {
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            stunned = false;
         }
         else
         {
