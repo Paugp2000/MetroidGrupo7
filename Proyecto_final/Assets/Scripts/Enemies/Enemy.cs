@@ -21,6 +21,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        OnTriggerEnter2DInternal(collision);
+    }
+
+    protected virtual void OnTriggerEnter2DInternal(Collider2D collision)
+    {
         if (collision.tag == "Player" && !PlayerController.Instance.Untouchable)
             GameManager.Instance.TakeEnergy(damage);
         else if (collision.tag == "PowerBeam")
