@@ -72,7 +72,7 @@
                 {
                     "name": "",
                     "id": "f26677c1-3cb3-4b2e-aa09-64946ac57a1d",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -83,28 +83,76 @@
             ]
         },
         {
-            "name": "Pausar",
-            "id": "bd32b19a-0b36-4d39-a1e9-d46280cc1665",
+            "name": "Abilities",
+            "id": "cc2a5ece-6fea-4d37-8438-969692edf693",
             "actions": [
                 {
-                    "name": "pausar",
+                    "name": "LightShoot",
                     "type": "Button",
-                    "id": "4dfd224e-2cbd-4990-9196-c172130f6c54",
+                    "id": "01bcf215-5e0c-4ad0-b793-ae33054cb6c2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MissileShoot",
+                    "type": "Button",
+                    "id": "b0205885-58d7-4afe-bfec-82c89ad1f1bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "fc2288f1-2ba1-451f-abc8-abd0fc96cd08",
-                    "path": "<Keyboard>/escape",
+                    "id": "ef9ddc47-bd37-481c-bf70-d42bf2a11fe3",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "pausar",
+                    "action": "LightShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f86c5fd-aa0f-4b84-9412-dad86bfe702f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MissileShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pointing",
+            "id": "6c7d1896-5dec-4566-b2e7-87486039f649",
+            "actions": [
+                {
+                    "name": "Up",
+                    "type": "Value",
+                    "id": "27408ca3-cc17-4ef9-97bf-c999d5cc8d5a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5c307bad-a56a-4df6-925a-4f9503829a16",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
