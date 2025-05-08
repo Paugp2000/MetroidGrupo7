@@ -5,55 +5,69 @@ using UnityEngine.SceneManagement;
 public class ImageMoverAndSceneLoader : MonoBehaviour
 {
     public RectTransform imageTransform; // Asigna tu imagen aquí desde el Inspector
-    public Vector2 movedPosition = new Vector2(0, -79); // Posición a la que se moverá hacia abajo
     private Vector2 originalPosition;
-    private bool isMoved = false; // Para saber si la imagen ya está movida
+    private Vector2 midPosition = new Vector2(0, -46);
+    private Vector2 finalPosition = new Vector2(0, -94);
+    private int moveState = 0; // 0 = original, 1 = -79, 2 = -94
 
     void Start()
     {
         if (imageTransform != null)
         {
-            originalPosition = imageTransform.anchoredPosition; // Guardamos la posición original
+            originalPosition = imageTransform.anchoredPosition;
+            midPosition.x = originalPosition.x;   // Asegurar que mantenga la misma X
+            finalPosition.x = originalPosition.x;
         }
     }
 
     void Update()
     {
-        // Mover la imagen hacia abajo, pero limitar que no baje de -79
+        // Mover hacia abajo con S
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Vector2 targetPosition = movedPosition;
-
-            // Limitar que no sea menor que -79 en Y
-            if (targetPosition.y < -79)
+            if (moveState == 0)
             {
-                targetPosition.y = -79;
+                imageTransform.anchoredPosition = midPosition;
+                moveState = 1;
             }
-
-            // Mueve la imagen hacia abajo, pero no más allá de -79
-            imageTransform.anchoredPosition = targetPosition;
-            isMoved = true;
+            else if (moveState == 1)
+            {
+                imageTransform.anchoredPosition = finalPosition;
+                moveState = 2;
+            }
         }
 
+        // Mover hacia arriba con W
         if (Input.GetKeyDown(KeyCode.W))
         {
-            // Si ya se movió, la imagen vuelve a la posición original
-            imageTransform.anchoredPosition = originalPosition;
-            isMoved = false;
+            if (moveState == 2)
+            {
+                imageTransform.anchoredPosition = midPosition;
+                moveState = 1;
+            }
+            else if (moveState == 1)
+            {
+                imageTransform.anchoredPosition = originalPosition;
+                moveState = 0;
+            }
         }
 
-        // Cambiar de escena dependiendo de la posición Y de la imagen
+        // Cambiar de escena según posición actual
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            // Si la posición Y de la imagen es 0, carga una escena
-            if (imageTransform.anchoredPosition.y == 0)
+            float posY = imageTransform.anchoredPosition.y;
+
+            if (Mathf.Approximately(posY, originalPosition.y))
             {
-                SceneManager.LoadScene("SampleScene"); // Reemplaza con el nombre real de la escena
+                SceneManager.LoadScene("SampleScene"); // Reemplaza con la escena para Y = original
             }
-            // Si la posición Y de la imagen es -79, carga otra escena
-            else if (imageTransform.anchoredPosition.y == -79)
+            else if (Mathf.Approximately(posY, midPosition.y))
             {
-                SceneManager.LoadScene("MenuMetroid"); // Reemplaza con el nombre real de la escena
+                SceneManager.LoadScene("MenuMetroid"); // Reemplaza con la escena para Y = -79
+            }
+            else if (Mathf.Approximately(posY, finalPosition.y))
+            {
+                SceneManager.LoadScene("Opciones"); // Reemplaza con la escena para Y = -94
             }
         }
     }

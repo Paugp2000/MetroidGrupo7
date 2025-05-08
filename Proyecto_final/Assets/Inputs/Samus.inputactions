@@ -81,6 +81,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Pausar",
+            "id": "bd32b19a-0b36-4d39-a1e9-d46280cc1665",
+            "actions": [
+                {
+                    "name": "pausar",
+                    "type": "Button",
+                    "id": "4dfd224e-2cbd-4990-9196-c172130f6c54",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fc2288f1-2ba1-451f-abc8-abd0fc96cd08",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "pausar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
