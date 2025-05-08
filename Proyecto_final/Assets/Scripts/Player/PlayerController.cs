@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Transform RightRaycastOrigin;
+
     //==========END RAYCAST==========//
 
 
@@ -148,6 +149,8 @@ public class PlayerController : MonoBehaviour
 
         if (ToOnAir())
             return;
+
+
     }
 
     void OnAir()
@@ -281,7 +284,6 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy" && !Untouchable)
