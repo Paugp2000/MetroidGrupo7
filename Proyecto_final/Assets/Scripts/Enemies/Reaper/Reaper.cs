@@ -7,43 +7,47 @@ using UnityEngine;
 public class Reaper : Enemy
 {
     [SerializeField] LayerMask floorMask;
-    Rigidbody2D Rb;
-    float direction = 1;
-    // Start is called before the first frame update
+    Rigidbody2D Rb2D;
+    [SerializeField] Transform raycastOrigin;
+
     void Start()
     {
-        Rb = GetComponent<Rigidbody2D>();
-        Rb.velocity = new Vector2(direction * speed, 0f);
+        Rb2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (stunned)
-        {
-            Rb.velocity = Vector2.zero;
-            stunned = false;
-        }
-        else
-        {
+            Rb2D.velocity = transform.right * speed;
             controlRaycast();
-            Rb.velocity = new Vector2(direction * speed, 0f);
-        }
+
     }
     void controlRaycast()
     {
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right, 0.8f, floorMask);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right, 0.8f, floorMask);
-        if (hitLeft)
-        {
-            direction *= -1;
-            transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
-        }
+        RaycastHit2D hitRight = Physics2D.Raycast(raycastOrigin.position, transform.right, 0.1f, floorMask);
         if (hitRight)
         {
-            direction *= -1;
-            transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
-
+            Debug.Log("hitRight");
+            if (transform.rotation.y == 0)
+            {
+                transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+            }
+            else
+            {
+                transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
+            }
         }
     }
+
+    protected override void OnTriggerEnter2DInternal(Collider2D collision)
+    {
+        base.OnTriggerEnter2DInternal(collision);
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
+        {
+            Rb2D.velocity = Vector2.zero;
+            Invoke("autoDestruction", 2);
+        }
+    }
+
+
+
 }
