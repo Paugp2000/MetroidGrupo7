@@ -355,10 +355,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 493399957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015e2f0a329f294439f9a92dae213d52, type: 3}
+  m_Script: {fileID: 11500000, guid: 01763d3344c170b4e8a6d8ded807c303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   imageTransform: {fileID: 493399958}
+  inputActionsMapping: {fileID: -944628639613478452, guid: 2198d2c332181d54cab2e52aa4943c5c, type: 3}
 --- !u!114 &493399960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,7 +677,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 992121679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c48c3067b91638b4aa07be83ccbda61f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5072013731586c941ab5b36e0f80841a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &992121681

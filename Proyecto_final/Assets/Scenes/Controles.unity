@@ -349,7 +349,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &296114894
+--- !u!1 &331171324
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,9 +357,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 296114895}
-  - component: {fileID: 296114897}
-  - component: {fileID: 296114896}
+  - component: {fileID: 331171325}
+  - component: {fileID: 331171327}
+  - component: {fileID: 331171326}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -367,13 +367,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &296114895
+--- !u!224 &331171325
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296114894}
+  m_GameObject: {fileID: 331171324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -383,16 +383,16 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 244.1301, y: 1.33}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: 156.85614, y: -0.1929}
+  m_SizeDelta: {x: 45.6556, y: 48.143}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &296114896
+--- !u!114 &331171326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296114894}
+  m_GameObject: {fileID: 331171324}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -727121423, guid: 860ae789bba41e045bf274ed2155f6a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d609d756809ec1d4990f72d93b826d2f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -416,13 +416,13 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &296114897
+--- !u!222 &331171327
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296114894}
+  m_GameObject: {fileID: 331171324}
   m_CullTransparentMesh: 1
 --- !u!1 &362120017
 GameObject:
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 449421988}
   - component: {fileID: 449421987}
   m_Layer: 5
-  m_Name: TECLA S
+  m_Name: ESCAPE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,7 +1095,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 296114895}
+  - {fileID: 331171325}
   m_Father: {fileID: 383096361}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Poder de la Rueda ( S )
+  m_text: Pausar ( Escape )
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c619ba1c746f9f842b059381b233e556, type: 2}
   m_sharedMaterial: {fileID: -1319001780615744749, guid: c619ba1c746f9f842b059381b233e556, type: 2}

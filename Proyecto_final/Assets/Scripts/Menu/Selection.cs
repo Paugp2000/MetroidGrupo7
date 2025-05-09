@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using static UnityEditor.ShaderData;
 
 public class ImageMoverAndSceneLoader : MonoBehaviour
 {
@@ -9,6 +11,16 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
     private Vector2 midPosition = new Vector2(0, -46);
     private Vector2 finalPosition = new Vector2(0, -94);
     private int moveState = 0; // 0 = original, 1 = -79, 2 = -94
+    public InputActionAsset inputActionsMapping;
+    InputAction up, dawn, enter;
+
+    private void Awake()
+    {
+        inputActionsMapping.Enable();
+        up = inputActionsMapping.FindActionMap("Selec").FindAction("up");
+        dawn = inputActionsMapping.FindActionMap("Selec").FindAction("dawn");
+        enter = inputActionsMapping.FindActionMap("Selec").FindAction("enter");
+    }
 
     void Start()
     {
@@ -23,7 +35,7 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
     void Update()
     {
         // Mover hacia abajo con S
-        if (Input.GetKeyDown(KeyCode.S))
+        if (dawn.triggered)
         {
             if (moveState == 0)
             {
@@ -38,7 +50,7 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
         }
 
         // Mover hacia arriba con W
-        if (Input.GetKeyDown(KeyCode.W))
+        if (up.triggered)
         {
             if (moveState == 2)
             {
@@ -53,13 +65,13 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
         }
 
         // Cambiar de escena según posición actual
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (enter.triggered)
         {
             float posY = imageTransform.anchoredPosition.y;
 
             if (Mathf.Approximately(posY, originalPosition.y))
             {
-                SceneManager.LoadScene("SampleScene"); // Reemplaza con la escena para Y = original
+                SceneManager.LoadScene("MainLevel"); // Reemplaza con la escena para Y = original
             }
             else if (Mathf.Approximately(posY, midPosition.y))
             {

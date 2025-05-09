@@ -16,6 +16,7 @@ public class Ridley : Enemy
     private float currentTimeBetweenJumps;
     private float currentTimeBetweenShootsR;
 
+
     void Start()
     {
         RbR = GetComponent<Rigidbody2D>();
@@ -33,7 +34,7 @@ public class Ridley : Enemy
             currentTimeBetweenJumps = timeBetweenJumps;
             RidleyJump();
         }
-        currentTimeBetweenShootsR -= Time.deltaTime;
+            currentTimeBetweenShootsR -= Time.deltaTime;
         if(currentTimeBetweenShootsR <= 0)
         {
             currentTimeBetweenShootsR = timeBetweenShootsR;
@@ -47,6 +48,7 @@ public class Ridley : Enemy
     }
     void RidleyJump()
     {
+        
         RbR.AddForce(new Vector2(0, 1) * jumpImpulse, ForceMode2D.Impulse);
     }
     IEnumerator RidleyAttack()

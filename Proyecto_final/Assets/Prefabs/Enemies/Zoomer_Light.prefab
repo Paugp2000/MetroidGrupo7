@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 1717209717943668524}
   - component: {fileID: 1761771316800177829}
   - component: {fileID: 7418253406864017276}
+  - component: {fileID: 4935665405980347879}
   m_Layer: 0
   m_Name: Zoomer_Light
   m_TagString: Enemy
@@ -249,6 +250,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.9375}
   m_EdgeRadius: 0
+--- !u!95 &4935665405980347879
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6807373545268414569}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 70cadd455ad201b4f914ce9a709dd627, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6999796921257636562
 GameObject:
   m_ObjectHideFlags: 0
