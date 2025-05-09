@@ -30,7 +30,7 @@ public class NewBehaviourScript : MonoBehaviour
 
                 Time.timeScale = 0;
             }
-            else if (Pausa = true)
+            else if (Pausa == true)
             {
                 Resumir(); 
             }
