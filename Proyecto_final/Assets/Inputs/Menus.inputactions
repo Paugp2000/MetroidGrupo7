@@ -1,0 +1,102 @@
+{
+    "name": "Menus",
+    "maps": [
+        {
+            "name": "Pausar",
+            "id": "ff0635c4-5600-4bec-bae9-4b51afe58c27",
+            "actions": [
+                {
+                    "name": "pausar",
+                    "type": "Button",
+                    "id": "dfc9bb3f-bc0c-4895-aeaf-a522e7f148ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fc190da4-5078-4cbc-88f4-a3546b0f6aaa",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "pausar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Selec",
+            "id": "f504116a-40e1-44c9-b65f-f8f28ed324d3",
+            "actions": [
+                {
+                    "name": "up",
+                    "type": "Button",
+                    "id": "c5c1a8a7-fa4c-4d41-9719-e89b3db0cd6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "dawn",
+                    "type": "Button",
+                    "id": "59d88e43-9dcf-4797-ac0f-25f18573dee1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "enter",
+                    "type": "Button",
+                    "id": "8cee6c26-08ae-4212-86c1-c90edfc5f5dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ebbf6f5f-c2f3-4775-aa5a-de670fef48cf",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ef1d874-fddd-4d8a-a708-e2b53694282f",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "dawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea59353f-6113-498c-b3e0-96a2283f80da",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9111321886277469474}
   - component: {fileID: 2705479903701535819}
   - component: {fileID: -2743935397835763392}
+  - component: {fileID: 5233955564244785330}
   m_Layer: 0
   m_Name: Reo
   m_TagString: Untagged
@@ -226,6 +227,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.1875}
   m_EdgeRadius: 0
+--- !u!95 &5233955564244785330
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352088804107786483}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c54406480b3db924c819214742199b5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8263496169830574087
 GameObject:
   m_ObjectHideFlags: 0

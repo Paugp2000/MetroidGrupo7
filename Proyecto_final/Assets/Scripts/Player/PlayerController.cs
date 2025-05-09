@@ -12,11 +12,14 @@ public class PlayerController : MonoBehaviour
     float speed, jumpImpulse;
     //==========END SPEEDS & FORCES==========//
 
+    [SerializeField] private AudioClip jumpSound;  // Aquí agregamos una variable para el sonido
+    private AudioSource audioSource;  // Aquí almacenamos el AudioSource
 
     //============RIGIDBODY===========\\
-    Rigidbody2D rb2D;
+    public Rigidbody2D rb2D;
     //==========END RIGIDBODY==========//
 
+    Animator anim;
 
     //============MOVEMENT===========\\
     [SerializeField]
@@ -66,6 +69,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
     //==========END SINGELTON==========//
 
+    
 
 
     private void Awake()
@@ -73,8 +77,11 @@ public class PlayerController : MonoBehaviour
         inputActionsMapping.Enable();
         horizontal_ia = inputActionsMapping.FindActionMap("Movement").FindAction("Horizontal");
         jump_ia = inputActionsMapping.FindActionMap("Movement").FindAction("Jump");
+        anim = GetComponent<Animator>();
 
         rb2D = GetComponent<Rigidbody2D>();
+
+        
 
 
         if (Instance == null)
@@ -92,6 +99,11 @@ public class PlayerController : MonoBehaviour
         CurrentState = STATES.ONFLOOR;
         untouchableTime = maxUntouchableTime;
         rb2D.isKinematic = false;
+
+        // Obtén el componente AudioSource
+        audioSource = GetComponent<AudioSource>();
+
+        
     }
 
     private void Update()
@@ -129,6 +141,7 @@ public class PlayerController : MonoBehaviour
         float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());
 
         rb2D.velocity = new Vector2(speed * horizontalDirection, rb2D.velocity.y);
+        anim.SetFloat("Run", Math.Abs(rb2D.velocity.magnitude));
 
         if (horizontalDirection > 0)
         {
@@ -143,6 +156,11 @@ public class PlayerController : MonoBehaviour
 
         if (jump_ia.triggered)
         {
+            // Reproduce el sonido si el AudioSource está asignado
+            if (audioSource != null && jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
             rb2D.AddForce(new Vector2(0, 1) * jumpImpulse, ForceMode2D.Impulse);
         }
 
@@ -173,8 +191,14 @@ public class PlayerController : MonoBehaviour
         }
         else if ((jump_ia.WasReleasedThisFrame() && rb2D.velocity.y > 0 && jumpTime <= 0) || (jumpTime <= 0 && !jump_ia.IsPressed())) {
             rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
+           
         }
 
+        anim.SetBool("Salta", true);
+        
+        
+
+        rb2D.velocity = new Vector2((speed * (horizontalDirection/100 * 50)), rb2D.velocity.y);
         if (ToOnFloor())
             return;
     }
@@ -202,7 +226,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2D.velocity = Vector2.zero;
         rb2D.isKinematic = true;
-        //animaci�n morir
+        //animaci�n morir
     }
 
     void OnTransitionL()
@@ -248,6 +272,7 @@ public class PlayerController : MonoBehaviour
     {
         if (DetectFloor())
         {
+            anim.SetBool("Salta", false);
             return true;
         }
         return false;
