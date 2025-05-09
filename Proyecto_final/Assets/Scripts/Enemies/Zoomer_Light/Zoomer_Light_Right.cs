@@ -26,15 +26,12 @@ public class Zoomer_Light_Right : Enemy
         if (stunned)
         {
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            stunned = false;
         }
         else
         {
             Rb2d.velocity = direction * speed;
         }
-
     }
-
     void controlRaycast()
     {
         RaycastHit2D hitDownRigthOut = Physics2D.Raycast(rayCastDownRightOut.position, -transform.up, 0.2f, floorLayer);

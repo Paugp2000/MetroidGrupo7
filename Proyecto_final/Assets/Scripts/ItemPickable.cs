@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemPickable : MonoBehaviour
 {
-    enum ITEM {ENERGI, MISSILE};
+    enum ITEM {ENERGI, MISSILE, MISSILE_UPGRADE};
 
     [SerializeField] ITEM item;
 
@@ -23,7 +23,14 @@ public class ItemPickable : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 case ITEM.MISSILE:
-                    GameManager.Instance.missiles++;
+                    if (GameManager.Instance.enableMissiles)
+                    {
+                        GameManager.Instance.missiles++;
+                        Destroy(gameObject);
+                    }
+                    break;
+                case ITEM.MISSILE_UPGRADE:
+                    GameManager.Instance.enableMissiles = true;
                     Destroy(gameObject);
                     break;
             }

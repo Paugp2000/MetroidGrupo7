@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    protected void TakeDamage(int damage)
     {
         StartCoroutine(stunnedCoroutine());
         lives -= damage;
