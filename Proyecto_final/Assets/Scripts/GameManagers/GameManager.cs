@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
     {
         missiles++;
     }
+    public void AddMissile(int missilesNumber)
+    {
+        missiles += missilesNumber;
+    }
 
     public void TakeEnergy(int damage)
     {

@@ -23,14 +23,12 @@ public class ItemPickable : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 case ITEM.MISSILE:
-                    if (GameManager.Instance.enableMissiles)
-                    {
-                        GameManager.Instance.missiles++;
-                        Destroy(gameObject);
-                    }
+                    GameManager.Instance.AddMissile();
+                    Destroy(gameObject);
                     break;
                 case ITEM.MISSILE_UPGRADE:
                     GameManager.Instance.enableMissiles = true;
+                    GameManager.Instance.AddMissile(10);
                     Destroy(gameObject);
                     break;
             }

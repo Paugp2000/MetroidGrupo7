@@ -30,8 +30,7 @@ public class PlayerAbilityController : MonoBehaviour
     {
         bool didShoot = false;
 
-        if (PlayerController.Instance.CurrentState == PlayerController.STATES.ONFLOOR ||
-            PlayerController.Instance.CurrentState == PlayerController.STATES.ONAIR)
+        if (PlayerController.Instance.CurrentState == PlayerController.STATES.ONFLOOR || PlayerController.Instance.CurrentState == PlayerController.STATES.ONAIR)
         {
             
             if (lightShoot.triggered)

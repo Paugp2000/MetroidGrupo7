@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     float jumpTime = 0.25f;
     const float MIN_JUMP_TIME = 0.15f;
 
-    const int jumpMobilityPercet = 75;
+    const int JUMP_MOBILITY_PERCENT = 75;
 
     [SerializeField]
     public InputActionAsset inputActionsMapping;
@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
         }
 
-        rb2D.velocity = new Vector2((speed * (horizontalDirection/100 * jumpMobilityPercet)), rb2D.velocity.y);
+        //rb2D.velocity = new Vector2(speed * (horizontalDirection/100 * JUMP_MOBILITY_PERCENT), rb2D.velocity.y);
 
         if (rb2D.velocity.y < 0)
         { 
@@ -195,10 +195,10 @@ public class PlayerController : MonoBehaviour
         }
 
         anim.SetBool("Salta", true);
-        
-        
 
-        rb2D.velocity = new Vector2((speed * (horizontalDirection/100 * 50)), rb2D.velocity.y);
+
+
+        rb2D.velocity = new Vector2(speed * (horizontalDirection / 100 * JUMP_MOBILITY_PERCENT), rb2D.velocity.y);
         if (ToOnFloor())
             return;
     }

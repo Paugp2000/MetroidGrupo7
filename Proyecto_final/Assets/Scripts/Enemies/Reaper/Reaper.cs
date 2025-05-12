@@ -26,7 +26,6 @@ public class Reaper : Enemy
         RaycastHit2D hitRight = Physics2D.Raycast(raycastOrigin.position, transform.right, 0.1f, floorMask);
         if (hitRight)
         {
-            Debug.Log("hitRight");
             if (transform.rotation.y == 0)
             {
                 transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
@@ -37,17 +36,18 @@ public class Reaper : Enemy
             }
         }
     }
-
+    
     protected override void OnTriggerEnter2DInternal(Collider2D collision)
     {
-        base.OnTriggerEnter2DInternal(collision);
-        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
+        if (collision.tag == "Player" && !PlayerController.Instance.Untouchable) { 
+            Debug.Log("AU REAPER");
+            GameManager.Instance.TakeEnergy(damage);
+        }
+        else if (collision.tag == "Missile")
         {
-            Rb2D.velocity = Vector2.zero;
-            Invoke("autoDestruction", 2);
+            Debug.Log("PATAPUM");
+            TakeDamage(10);
         }
     }
-
-
 
 }
