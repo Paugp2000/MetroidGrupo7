@@ -161,7 +161,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8943188853486028765}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
         m_MethodName: Menu
         m_Mode: 5
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8943188853486028765}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
         m_MethodName: Resumir
         m_Mode: 1
@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 8376842903839882302}
   - component: {fileID: 1527601953490569478}
   - component: {fileID: 7169330568959395127}
-  - component: {fileID: 8943188853486028765}
+  - component: {fileID: 5481152297560083815}
   m_Layer: 5
   m_Name: CanvasPausa
   m_TagString: Untagged
@@ -603,7 +603,7 @@ RectTransform:
   m_GameObject: {fileID: 5239999573077216941}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 625580045924271387}
@@ -613,7 +613,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8376842903839882302
 Canvas:
   m_ObjectHideFlags: 0
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8943188853486028765
+--- !u!114 &5481152297560083815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -689,9 +689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84578758229db004196b64b20ec8dd06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrupoPausa: {fileID: 327810988988278464}
+  GrupoPausa: {fileID: 0}
   Pausa: 0
-  inputActionsMapping: {fileID: -944628639613478452, guid: 2198d2c332181d54cab2e52aa4943c5c, type: 3}
+  inputActionsMapping: {fileID: 0}
 --- !u!1 &5900462008801733175
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8943188853486028765}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
         m_MethodName: Opciones
         m_Mode: 5
