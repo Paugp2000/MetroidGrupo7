@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 625580045924271387}
+  - component: {fileID: 6935434885862872379}
   m_Layer: 5
   m_Name: GrupoPausa
   m_TagString: Untagged
@@ -40,6 +41,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -326, y: -140}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6935434885862872379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327810988988278464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27a5f0a78ad52346acf8edaabcf6a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 5223080033856646802}
 --- !u!1 &1364145054812298018
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +175,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5481152297560083815}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
         m_MethodName: Menu
         m_Mode: 5
@@ -562,7 +576,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5481152297560083815}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
         m_MethodName: Resumir
         m_Mode: 1
@@ -689,9 +703,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84578758229db004196b64b20ec8dd06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrupoPausa: {fileID: 0}
+  GrupoPausa: {fileID: 327810988988278464}
   Pausa: 0
-  inputActionsMapping: {fileID: 0}
+  inputActionsMapping: {fileID: -944628639613478452, guid: 2198d2c332181d54cab2e52aa4943c5c, type: 3}
 --- !u!1 &5900462008801733175
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +827,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5481152297560083815}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
         m_MethodName: Opciones
         m_Mode: 5
