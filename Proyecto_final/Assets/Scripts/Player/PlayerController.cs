@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +14,16 @@ public class PlayerController : MonoBehaviour
     //==========END SPEEDS & FORCES==========//
 
     [SerializeField] private AudioClip jumpSound;  // Aquí agregamos una variable para el sonido
+    [SerializeField] private AudioClip deadSound;  // Aquí agregamos una variable para el sonido
+    [SerializeField] private AudioClip musicaJuego;  // Aquí agregamos una variable para el sonido
     private AudioSource audioSource;  // Aquí almacenamos el AudioSource
+
+
+    [SerializeField] private string sceneName = "NombreDeLaEscena"; // Cambia esto por el nombre de la escena
+    [SerializeField] private float delay = 5f; // Tiempo de espera en segundos
+
+    public bool puedeMoverse = false;
+
 
     //============RIGIDBODY===========\\
     public Rigidbody2D rb2D;
@@ -226,7 +236,14 @@ public class PlayerController : MonoBehaviour
     {
         rb2D.velocity = Vector2.zero;
         rb2D.isKinematic = true;
-        //animaci�n morir
+        //Animacion Muerte
+        anim.SetTrigger("Dead");
+        //Sonido Muerte 
+        if (deadSound != null)
+        {
+            AudioSource.PlayClipAtPoint(deadSound, transform.position);
+        }
+        StartCoroutine(ChangeSceneAfterDelay());
     }
 
     void OnTransitionL()
@@ -361,6 +378,20 @@ public class PlayerController : MonoBehaviour
     bool Transitioning()
     {
         return true;
+    }
+
+    private System.Collections.IEnumerator ChangeSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void FinIntro()
+    {
+        if (audioSource != null && musicaJuego != null)
+        {
+            audioSource.PlayOneShot(musicaJuego);
+        }
     }
     //======================================== END EXTRA FUNCTIONS =======================================//
 }

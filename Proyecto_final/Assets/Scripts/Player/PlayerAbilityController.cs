@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,34 +11,34 @@ public class PlayerAbilityController : MonoBehaviour
     [SerializeField] public InputActionAsset inputActionsMapping;
     InputAction lightShoot, missileShoot, pointingUp;
 
-   
-
     Animator anim;
     bool isShooting = false;
 
-    
+    Rigidbody2D rb;
+
     private void Awake()
     {
         lightShoot = inputActionsMapping.FindActionMap("Abilities").FindAction("LightShoot");
         missileShoot = inputActionsMapping.FindActionMap("Abilities").FindAction("MissileShoot");
         pointingUp = inputActionsMapping.FindActionMap("Pointing").FindAction("Up");
-        anim = GetComponent<Animator>();
 
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         bool didShoot = false;
+        bool isPointingUp = pointingUp.ReadValue<float>() > 0;
+        bool isMoving = Mathf.Abs(rb.velocity.x) > 0.1f;
 
         if (PlayerController.Instance.CurrentState == PlayerController.STATES.ONFLOOR || PlayerController.Instance.CurrentState == PlayerController.STATES.ONAIR)
         {
-            
             if (lightShoot.triggered)
             {
-                
                 didShoot = true;
 
-                if (pointingUp.ReadValue<float>() > 0)
+                if (isPointingUp)
                     Instantiate(powerBeam, topShootPoint.position, topShootPoint.rotation);
                 else
                     Instantiate(powerBeam, shootPoint.position, shootPoint.rotation);
@@ -48,7 +48,7 @@ public class PlayerAbilityController : MonoBehaviour
                 didShoot = true;
                 GameManager.Instance.missiles--;
 
-                if (pointingUp.ReadValue<float>() > 0)
+                if (isPointingUp)
                     Instantiate(missile, topShootPoint.position, topShootPoint.rotation);
                 else
                     Instantiate(missile, shootPoint.position, shootPoint.rotation);
@@ -57,30 +57,65 @@ public class PlayerAbilityController : MonoBehaviour
 
         if (didShoot)
         {
-            StartShootingAnimation();
+            StartShootingAnimation(isPointingUp, isMoving);
+        }
+
+        if (isShooting)
+        {
+            UpdateShootingDirection(isPointingUp, isMoving);
         }
     }
 
-    private void StartShootingAnimation()
+    private void StartShootingAnimation(bool isPointingUp, bool isMoving)
     {
-        if (!isShooting)
-        {
-            if (pointingUp.triggered)
-            {
+        UpdateShootingDirection(isPointingUp, isMoving);
+        isShooting = true;
 
-            }
-            anim.SetBool("Shoot", true);
-            isShooting = true;
-        }
-
-        // Reset the timer to stop animation in 0.2s if no more shooting happens
         CancelInvoke(nameof(StopShootAnimation));
         Invoke(nameof(StopShootAnimation), 0.2f);
+    }
+
+    private void UpdateShootingDirection(bool isPointingUp, bool isMoving)
+    {
+        // Apagar todas las animaciones primero
+        anim.SetBool("Shoot", false);
+        anim.SetBool("ShootUpRun", false);
+        anim.SetBool("ShootUpIdle", false);
+        anim.SetBool("ShootAir", false);
+        anim.SetBool("ShootUpAir", false);
+
+        var playerState = PlayerController.Instance.CurrentState;
+
+        if (playerState == PlayerController.STATES.ONAIR)
+        {
+            if (isPointingUp)
+                anim.SetBool("ShootUpAir", true);
+            else
+                anim.SetBool("ShootAir", true);
+        }
+        else
+        {
+            if (isPointingUp)
+            {
+                if (isMoving)
+                    anim.SetBool("ShootUpRun", true);
+                else
+                    anim.SetBool("ShootUpIdle", true);
+            }
+            else
+            {
+                anim.SetBool("Shoot", true);
+            }
+        }
     }
 
     private void StopShootAnimation()
     {
         anim.SetBool("Shoot", false);
+        anim.SetBool("ShootUpRun", false);
+        anim.SetBool("ShootUpIdle", false);
+        anim.SetBool("ShootAir", false);
+        anim.SetBool("ShootUpAir", false);
         isShooting = false;
     }
 }

@@ -175,7 +175,7 @@ MonoBehaviour:
   speed: 15
   damage: 1
   lifeTime: 0.2
-  shootSound: {fileID: 8300000, guid: e39468a96da51834a96b6da30ca878bb, type: 3}
+  shootSound: {fileID: 8300000, guid: a190164d164dc4f4589a51948a4fd50a, type: 3}
 --- !u!82 &1958734755814369676
 AudioSource:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e39468a96da51834a96b6da30ca878bb, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
