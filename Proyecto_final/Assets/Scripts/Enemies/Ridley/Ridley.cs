@@ -25,7 +25,6 @@ public class Ridley : Enemy
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentTimeBetweenJumps -= Time.deltaTime;
@@ -39,10 +38,6 @@ public class Ridley : Enemy
         {
             currentTimeBetweenShootsR = timeBetweenShootsR;
             StartCoroutine("RidleyAttack");
-        }
-        if (this.lives <= 0)
-        {
-            RidleyDeath();
         }
        
     }
@@ -59,9 +54,4 @@ public class Ridley : Enemy
             yield return new WaitForSeconds(frequency);
         }
     }
-    void RidleyDeath()
-    {
-        //Muerte de ridley
-    }
-    
 }

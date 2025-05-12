@@ -48,7 +48,7 @@ public class ItemPickable : MonoBehaviour
                 case ITEM.MISSILE_UPGRADE:
                    
                     GameManager.Instance.enableMissiles = true;
-                    GameManager.Instance.AddMissile(10);
+                    GameManager.Instance.AddMissile(30);
                     GrupoMissile.SetActive(true);
                     Missiles = true;
 
