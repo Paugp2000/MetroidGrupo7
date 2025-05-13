@@ -13,18 +13,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip introMusic;
     private AudioSource audioSource;
 
-
     public bool enableMissiles = false;
 
     private Vector3 lastCheckpoint;
 
+    private float timeOnGame;
+    private float finalTime;
 
     public static GameManager Instance;
-    private void Start()
-    {
-        // Obtén el componente AudioSource
-        audioSource = GetComponent<AudioSource>();
-    }
     private void Awake()
     {
         if (Instance == null)
@@ -42,6 +38,18 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        // Obtén el componente AudioSource
+        audioSource = GetComponent<AudioSource>();
+        timeOnGame = 0;
+    }
+
+    private void Update()
+    {
+        timeOnGame += Time.deltaTime;
     }
 
     public void SetLastCheckpoint(Vector3 newCheckpoint)
@@ -70,6 +78,10 @@ public class GameManager : MonoBehaviour
     {
         missiles++;
     }
+    public void AddMissile(int missilesNumber)
+    {
+        missiles += missilesNumber;
+    }
 
     public int GetMissiles()
     {
@@ -92,4 +104,10 @@ public class GameManager : MonoBehaviour
     {
         enableMissiles = true;
     }
+
+    public void StopTimeOnGame()
+    {
+        finalTime = timeOnGame;
+    }
+
 }

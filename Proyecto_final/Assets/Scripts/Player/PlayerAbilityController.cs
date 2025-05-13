@@ -32,8 +32,7 @@ public class PlayerAbilityController : MonoBehaviour
         bool isPointingUp = pointingUp.ReadValue<float>() > 0;
         bool isMoving = Mathf.Abs(rb.velocity.x) > 0.1f;
 
-        if (PlayerController.Instance.CurrentState == PlayerController.STATES.ONFLOOR ||
-            PlayerController.Instance.CurrentState == PlayerController.STATES.ONAIR)
+        if (PlayerController.Instance.CurrentState == PlayerController.STATES.ONFLOOR || PlayerController.Instance.CurrentState == PlayerController.STATES.ONAIR)
         {
             if (lightShoot.triggered)
             {

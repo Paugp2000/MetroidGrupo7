@@ -130,13 +130,16 @@ MonoBehaviour:
   lives: 5
   speed: 10
   damage: 2
-  powerBeamPickeable: {fileID: 0}
-  missilePickeable: {fileID: 0}
+  powerBeamPickeable: {fileID: 6263134684158610267, guid: f7b3f39e95a33324884856e43ca640b5, type: 3}
+  missilePickeable: {fileID: 2224830809662790571, guid: ab5869f0c4145b5468904ecdc8287950, type: 3}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  mapLayer:
+    serializedVersion: 2
+    m_Bits: 8
   explosion: {fileID: 2187073572458712047, guid: e4eae5bfd13c64b449e41c684f8f7656, type: 3}
-  target: {fileID: 0}
+  target: {fileID: 7322318899764229732, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
 --- !u!61 &-2277156325014545149
 BoxCollider2D:
   m_ObjectHideFlags: 0

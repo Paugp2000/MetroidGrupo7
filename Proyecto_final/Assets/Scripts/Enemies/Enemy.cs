@@ -24,8 +24,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnTriggerEnter2DInternal(Collider2D collision)
     {
-        if (collision.tag == "Player" && !PlayerController.Instance.Untouchable)
-            GameManager.Instance.TakeEnergy(damage);
+        if (collision.tag == "Player" && !PlayerController.Instance.Untouchable) { 
+        Debug.Log("AU REAPER");
+        GameManager.Instance.TakeEnergy(damage);
+        }
         else if (collision.tag == "PowerBeam")
         {
             TakeDamage(1);
@@ -58,19 +60,23 @@ public class Enemy : MonoBehaviour
 
     void DropItem()
     {
-        //randomNumber = Random.range(1,15);   Random.Range no funca
+        randomNumber = UnityEngine.Random.Range(1,3);
+        Debug.Log(randomNumber);
         switch (randomNumber)
         {
             case 1:
-                Instantiate(powerBeamPickeable);
+                Instantiate(powerBeamPickeable, transform.position, transform.rotation);
                 break;
             case 2:
-                Instantiate(missilePickeable);
+                if (GameManager.Instance.enableMissiles)
+                {
+                Instantiate(missilePickeable, transform.position, transform.rotation);
+                }
                 break;
         }
     }
 
-    void Dye()
+    protected void Dye()
     {
         DropItem();
         Destroy(gameObject);

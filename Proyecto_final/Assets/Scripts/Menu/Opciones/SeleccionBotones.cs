@@ -13,5 +13,13 @@ public class SeleccionBotones : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(defaultButton);
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            EventSystem.current.SetSelectedGameObject(defaultButton);
+        }
+    }
+
 
 }

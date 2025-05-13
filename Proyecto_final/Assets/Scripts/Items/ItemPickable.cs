@@ -11,12 +11,12 @@ public class ItemPickable : MonoBehaviour
     public bool Missiles = false;
 
     [SerializeField] ITEM item;
-    [SerializeField] private AudioClip itemSound;  // Aquí agregamos una variable para el sonido
-    private AudioSource audioSource;  // Aquí almacenamos el AudioSource
+    [SerializeField] private AudioClip itemSound;  // Aquï¿½ agregamos una variable para el sonido
+    private AudioSource audioSource;  // Aquï¿½ almacenamos el AudioSource
 
     private void Start()
     {
-        // Obtén el componente AudioSource
+        // Obtï¿½n el componente AudioSource
         audioSource = GetComponent<AudioSource>();
         audioSource.enabled = true;
 
@@ -42,19 +42,17 @@ public class ItemPickable : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 case ITEM.MISSILE:
-                    if (GameManager.Instance.enableMissiles)
-                    {
-                        GameManager.Instance.missiles++;
-                        Destroy(gameObject);
-                    }
+                    GameManager.Instance.AddMissile();
+                    Destroy(gameObject);
                     break;
                 case ITEM.MISSILE_UPGRADE:
                    
                     GameManager.Instance.enableMissiles = true;
+                    GameManager.Instance.AddMissile(30);
                     GrupoMissile.SetActive(true);
                     Missiles = true;
 
-                    // Reproduce el sonido si el AudioSource está asignado a la funcion
+                    // Reproduce el sonido si el AudioSource estï¿½ asignado a la funcion
                     SoundActive();
 
                     Destroy(gameObject);

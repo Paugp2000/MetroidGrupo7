@@ -5,6 +5,7 @@ using UnityEngine;
 public class Skree : Enemy
 {
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask mapLayer;
     [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject target;
 
@@ -32,22 +33,30 @@ public class Skree : Enemy
 
     private void ControlRaycast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 12f, playerLayer);
-        Debug.DrawRay(transform.position, Vector2.down * 50f, Color.red);
+        RaycastHit2D playerHit = Physics2D.Raycast(transform.position, Vector2.down, 12f, playerLayer);
+        RaycastHit2D groundHit = Physics2D.Raycast(transform.position, Vector2.down, 1.05f, mapLayer);
+        Debug.DrawRay(transform.position, Vector2.down * 12f, Color.red);
 
-        if (hit.collider != null)
+        if (playerHit.collider != null)
         {
-            if (hit.collider.CompareTag("Player")){
+            if (playerHit.collider.CompareTag("Player")){
                 StartDescent();
-                if (hit.collider.transform.position.x > transform.position.x)
+                if (playerHit.collider.transform.position.x > transform.position.x)
                 {
                     rb.velocity += new Vector2(1f, 0);
                 }
-                else if(hit.collider.transform.position.x < transform.position.x)
+                else if(playerHit.collider.transform.position.x < transform.position.x)
                 {
                     rb.velocity += new Vector2(-1f, 0);
                 }
             }
+        }
+
+        if (groundHit.collider != null)
+        {
+            Debug.Log("suelo tocao");
+            rb.velocity = Vector2.zero;
+            Invoke("Dye", 1);
         }
     }
 
@@ -56,27 +65,13 @@ public class Skree : Enemy
         rb.velocity = new Vector2(0, -10);
     }
 
-
-    protected override void OnTriggerEnter2DInternal(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2DInternal(collision);
+        
         if (collision.gameObject.CompareTag("Player"))
         {
-            Invoke("autoDestruction", 1);
+            Invoke("Dye", 1);
         }
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            rb.velocity = Vector2.zero;
-            Invoke("autoDestruction", 1);
-        }
-    }
-
-    private void autoDestruction()
-    {
-        Instantiate(explosion, transform.position + new Vector3(1, 1, 0), Quaternion.identity);
-        Instantiate(explosion, transform.position + new Vector3(-1, 1, 0), Quaternion.identity);
-        Instantiate(explosion, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-        Instantiate(explosion, transform.position + new Vector3(-1, 0, 0), Quaternion.identity);
-        Destroy(gameObject);
     }
 }
