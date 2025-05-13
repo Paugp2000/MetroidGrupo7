@@ -71,6 +71,11 @@ public class GameManager : MonoBehaviour
         missiles++;
     }
 
+    public int GetMissiles()
+    {
+        return missiles;
+    }
+
     public void TakeEnergy(int damage)
     {
         Debug.Log(energy);
