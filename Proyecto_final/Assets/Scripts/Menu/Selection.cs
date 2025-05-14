@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using static UnityEditor.ShaderData;
 
 public class ImageMoverAndSceneLoader : MonoBehaviour
 {

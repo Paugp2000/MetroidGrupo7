@@ -36,7 +36,9 @@ public class PlayerAbilityController : MonoBehaviour
         {
             if (lightShoot.triggered)
             {
+                AnaliticsManager.Instance.AddPowerBeamsShoot();
                 didShoot = true;
+
 
                 if (isPointingUp)
                     Instantiate(powerBeam, topShootPoint.position, topShootPoint.rotation);
@@ -46,6 +48,7 @@ public class PlayerAbilityController : MonoBehaviour
             else if (missileShoot.triggered && GameManager.Instance.missiles > 0)
             {
                 didShoot = true;
+                AnaliticsManager.Instance.AddMissileShoot();
                 GameManager.Instance.missiles--;
 
                 if (isPointingUp)

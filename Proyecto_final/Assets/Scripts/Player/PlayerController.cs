@@ -170,12 +170,13 @@ public class PlayerController : MonoBehaviour
 
         if (jump_ia.triggered)
         {
-            // Reproduce el sonido si el AudioSource está asignado
+            //Reproduce el sonido si el AudioSource está asignado
             if (audioSource != null && jumpSound != null)
             {
                 audioSource.PlayOneShot(jumpSound);
             }
             rb2D.AddForce(new Vector2(0, 1) * jumpImpulse, ForceMode2D.Impulse);
+            AnaliticsManager.Instance.AddJump();
         }
 
         if (ToOnAir())

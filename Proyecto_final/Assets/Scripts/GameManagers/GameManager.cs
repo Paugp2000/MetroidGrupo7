@@ -18,9 +18,12 @@ public class GameManager : MonoBehaviour
     private Vector3 lastCheckpoint;
 
     private float timeOnGame;
-    private float finalTime;
 
     public static GameManager Instance;
+
+
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -43,7 +46,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Obtén el componente AudioSource
         audioSource = GetComponent<AudioSource>();
         lastCheckpoint = new Vector3(0.5f, -1, 0);
         energy = 30;
@@ -69,7 +71,6 @@ public class GameManager : MonoBehaviour
         return energy;
     }
 
-
     public void AddEnergy()
     {
         energy += 5;
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         missiles++;
     }
+
     public void AddMissile(int missilesNumber)
     {
         missiles += missilesNumber;
@@ -107,14 +109,9 @@ public class GameManager : MonoBehaviour
 
     public void StopTimeOnGame()
     {
-        finalTime = timeOnGame;
-        Debug.Log("Llama a Mongo Connection");
-        MongoConnection.Instance.SaveFinalTime();
+        AnaliticsManager.Instance.SetTimeOnGame(timeOnGame);
     }
 
-    public float GetFinalTime()
-    {
-        return finalTime;
-    }
 
 }
+

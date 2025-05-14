@@ -78,6 +78,7 @@ public class Enemy : MonoBehaviour
 
     protected void Dye()
     {
+        AnaliticsManager.Instance.AddKill();
         DropItem();
         Destroy(gameObject);
     }
