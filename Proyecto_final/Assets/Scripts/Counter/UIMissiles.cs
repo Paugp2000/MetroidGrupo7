@@ -8,7 +8,7 @@ public class UIMissiles : MonoBehaviour
     void Update()
     {
         int misilesActuales = GameManager.Instance.GetMissiles();
-        misilesActuales = Mathf.Max(misilesActuales, 000); // Evita números negativos
+        misilesActuales = Mathf.Max(misilesActuales, 0); // Evita números negativos
         textoMisiles.text = misilesActuales.ToString();
     }
 }

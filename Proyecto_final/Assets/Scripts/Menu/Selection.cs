@@ -2,17 +2,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using static UnityEditor.ShaderData;
 
 public class ImageMoverAndSceneLoader : MonoBehaviour
 {
-    public RectTransform imageTransform; // Asigna tu imagen aquí desde el Inspector
+    public RectTransform imageTransform;
     private Vector2 originalPosition;
-    private Vector2 midPosition = new Vector2(0, -46);
-    private Vector2 finalPosition = new Vector2(0, -94);
-    private int moveState = 0; // 0 = original, 1 = -79, 2 = -94
+    private Vector2 firstPosition = new Vector2(0, -46);
+    private Vector2 secondPosition = new Vector2(0, -94);
+    private Vector2 thirdPosition = new Vector2(0, -142);  // Cerrar juego
+    private Vector2 fourthPosition = new Vector2(0, -193); // Nueva cuarta posición
+    private int moveState = 0; // 0 = original, 1 = first, 2 = second, 3 = third, 4 = fourth
+
     public InputActionAsset inputActionsMapping;
     InputAction up, dawn, enter;
+
+    [SerializeField] private AudioClip selectorSound;  // Aquí agregamos una variable para el sonido
+    private AudioSource audioSource;  // Aquí almacenamos el AudioSource
 
     private void Awake()
     {
@@ -24,63 +29,90 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         if (imageTransform != null)
         {
             originalPosition = imageTransform.anchoredPosition;
-            midPosition.x = originalPosition.x;   // Asegurar que mantenga la misma X
-            finalPosition.x = originalPosition.x;
+            firstPosition.x = originalPosition.x;
+            secondPosition.x = originalPosition.x;
+            thirdPosition.x = originalPosition.x;
+            fourthPosition.x = originalPosition.x;
         }
     }
 
     void Update()
     {
-        // Mover hacia abajo con S
         if (dawn.triggered)
         {
-            if (moveState == 0)
+            if (audioSource != null && selectorSound != null)
             {
-                imageTransform.anchoredPosition = midPosition;
-                moveState = 1;
+                audioSource.PlayOneShot(selectorSound);
             }
-            else if (moveState == 1)
+
+            if (moveState < 4)
             {
-                imageTransform.anchoredPosition = finalPosition;
-                moveState = 2;
+                moveState++;
+                UpdatePosition();
             }
         }
 
-        // Mover hacia arriba con W
         if (up.triggered)
         {
-            if (moveState == 2)
+            if (audioSource != null && selectorSound != null)
             {
-                imageTransform.anchoredPosition = midPosition;
-                moveState = 1;
+                audioSource.PlayOneShot(selectorSound);
             }
-            else if (moveState == 1)
+
+            if (moveState > 0)
             {
-                imageTransform.anchoredPosition = originalPosition;
-                moveState = 0;
+                moveState--;
+                UpdatePosition();
             }
         }
 
-        // Cambiar de escena según posición actual
         if (enter.triggered)
         {
-            float posY = imageTransform.anchoredPosition.y;
+            switch (moveState)
+            {
+                case 0:
+                    SceneManager.LoadScene("MainLevel");
+                    break;
+                case 1:
+                    SceneManager.LoadScene("MenuMetroid");
+                    break;
+                case 2:
+                    SceneManager.LoadScene("Opciones");
+                    break;
+                case 3:
+                    SceneManager.LoadScene("LeaderBoard");
+                    break;
+                case 4:
+                    Application.Quit();
+                    UnityEditor.EditorApplication.isPlaying = false;
+                    break;
+            }
+        }
+    }
 
-            if (Mathf.Approximately(posY, originalPosition.y))
-            {
-                SceneManager.LoadScene("MainLevel"); // Reemplaza con la escena para Y = original
-            }
-            else if (Mathf.Approximately(posY, midPosition.y))
-            {
-                SceneManager.LoadScene("MenuMetroid"); // Reemplaza con la escena para Y = -79
-            }
-            else if (Mathf.Approximately(posY, finalPosition.y))
-            {
-                SceneManager.LoadScene("Opciones"); // Reemplaza con la escena para Y = -94
-            }
+    void UpdatePosition()
+    {
+        switch (moveState)
+        {
+            case 0:
+                imageTransform.anchoredPosition = originalPosition;
+                break;
+            case 1:
+                imageTransform.anchoredPosition = firstPosition;
+                break;
+            case 2:
+                imageTransform.anchoredPosition = secondPosition;
+                break;
+            case 3:
+                imageTransform.anchoredPosition = thirdPosition;
+                break;
+            case 4:
+                imageTransform.anchoredPosition = fourthPosition;
+                break;
         }
     }
 }
