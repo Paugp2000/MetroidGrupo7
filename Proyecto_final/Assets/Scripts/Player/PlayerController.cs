@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private string sceneName = "NombreDeLaEscena"; // Cambia esto por el nombre de la escena
     [SerializeField] private float delay = 5f; // Tiempo de espera en segundos
 
-    public bool puedeMoverse = false;
+    public bool canMove = true;
 
 
     //============RIGIDBODY===========\\
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
 
     //============STATES============\\ads
-    public enum STATES { ONFLOOR, ONAIR, HURTED, DEAD, ON_TRANSITION_LEFT, ON_TRANSITION_RIGHT};
+    public enum STATES { ONFLOOR, ONAIR, HURTED, DEAD, ON_TRANSITION_LEFT, ON_TRANSITION_RIGHT, APPEARING};
     public STATES CurrentState;
     //==========END STATES==========//
 
@@ -106,7 +106,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        CurrentState = STATES.ONFLOOR;
+        CurrentState = STATES.APPEARING;
+        StartCoroutine(Appear());
         untouchableTime = maxUntouchableTime;
         rb2D.isKinematic = false;
 
@@ -139,6 +140,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case STATES.ON_TRANSITION_RIGHT:
                 OnTransitionR();
+                break;
+            case STATES.APPEARING:
+                Appearing();
                 break;
         }
     }
@@ -280,6 +284,13 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    void Appearing()
+    {
+    }
+
+
+
         //======================================= END STATES FUNCTIONS =======================================//
 
 
@@ -373,6 +384,12 @@ public class PlayerController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(255, 0.60f, 0.1f, 0.1f);
         yield return new WaitForSeconds(0.1f);
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+    IEnumerator Appear()
+    {
+        yield return new WaitForSeconds(7);
+        Debug.Log("Puedes empezar");
+        CurrentState = STATES.ONFLOOR;
     }
 
     bool Transitioning()

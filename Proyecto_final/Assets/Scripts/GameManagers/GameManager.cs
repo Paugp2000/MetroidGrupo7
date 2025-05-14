@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int maxEnergy = 99;
-    private int energy = 30;
+    private int energy;
     public int missiles;
 
     [SerializeField] private AudioClip introMusic;
     
     private AudioSource audioSource;
 
-    public bool enableMissiles = false;
+    public bool enableMissiles;
 
     private Vector3 lastCheckpoint;
 
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
             if (introMusic != null)
             {
                 AudioSource.PlayClipAtPoint(introMusic, transform.position);
@@ -45,7 +46,11 @@ public class GameManager : MonoBehaviour
     {
         // Obtén el componente AudioSource
         audioSource = GetComponent<AudioSource>();
+        lastCheckpoint = new Vector3(0.5f, -1, 0);
+        energy = 30;
+        missiles = 0;
         timeOnGame = 0;
+        enableMissiles = false;
     }
 
     private void Update()
@@ -109,6 +114,13 @@ public class GameManager : MonoBehaviour
     public void StopTimeOnGame()
     {
         finalTime = timeOnGame;
+        Debug.Log("Llama a Mongo Connection");
+        MongoConnection.Instance.SaveFinalTime();
+    }
+
+    public float GetFinalTime()
+    {
+        return finalTime;
     }
 
 }
