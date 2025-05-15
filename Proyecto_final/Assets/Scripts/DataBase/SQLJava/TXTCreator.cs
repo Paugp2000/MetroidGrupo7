@@ -1,19 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 
 public class TXTCreator : MonoBehaviour
 {
-    string ruta;
-
-    [SerializeField] SaveNamePlayer playerName;
-
+    [SerializeField] private TMP_InputField saveName;
+    private string nameSaved;
+    private string rutaO = @"D:\MetroidProyecto\MetroidGrupo7\MetroidGrupo7\Proyecto_final\Metroid.txt";
     private void Awake()
     {
         crearArchivoTexto();
     }
-    void Start()
+
+    public void UpdateName()
+    {
+        Debug.Log("funciona");
+        nameSaved = saveName.text;
+        colocardatos();
+    }
+
+    void colocardatos()
     {
         double finalTime = AnaliticsManager.Instance.GetFinalTime();
         int hours = (int)(finalTime / 3600);
@@ -21,20 +29,22 @@ public class TXTCreator : MonoBehaviour
         int seconds = (int)(finalTime % 60);
         int milliseconds = (int)((finalTime * 10) % 10);
         string formattedTime = string.Format("{0:00}:{1:00}:{2:00}.{3:000}", hours, minutes, seconds, milliseconds);
-        añadirTexto(formattedTime);
-        //string nombreUsuario = SaveNamePlayer.pla
+        string userName = nameSaved;
+        añadirTexto(userName, formattedTime);
     }
-   void crearArchivoTexto()
+
+    void crearArchivoTexto()
     {
-        string nombreArchivo = "Metroid.txt";
-        ruta = Path.Combine(Application.persistentDataPath, nombreArchivo);
-        File.Create(ruta).Close();
+        if(!File.Exists(rutaO)) { 
+        string ruta = @"D:\MetroidProyecto\MetroidGrupo7\MetroidGrupo7\Proyecto_final\Metroid.txt";
+        File.Create(ruta);
+        }
     }
-    void añadirTexto(string formattedTime)
+    void añadirTexto(string userName, string formattedTime)
     {
-        using (StreamWriter sw = new StreamWriter(ruta, true)) 
+        using (StreamWriter sw = new StreamWriter(rutaO, true)) 
         {
-            sw.WriteLine(formattedTime);
+            sw.WriteLine(userName + " " + formattedTime);
         }
     }
 }
