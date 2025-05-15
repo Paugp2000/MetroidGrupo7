@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveNamePlayer : MonoBehaviour
 {
-    string playerName;
+    public string playerName;
 
     public void SaveName (string name)
     {

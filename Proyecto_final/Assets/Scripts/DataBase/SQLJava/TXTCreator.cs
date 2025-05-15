@@ -6,6 +6,9 @@ using UnityEngine;
 public class TXTCreator : MonoBehaviour
 {
     string ruta;
+
+    [SerializeField] SaveNamePlayer playerName;
+
     private void Awake()
     {
         crearArchivoTexto();
@@ -19,6 +22,7 @@ public class TXTCreator : MonoBehaviour
         int milliseconds = (int)((finalTime * 10) % 10);
         string formattedTime = string.Format("{0:00}:{1:00}:{2:00}.{3:000}", hours, minutes, seconds, milliseconds);
         añadirTexto(formattedTime);
+        //string nombreUsuario = SaveNamePlayer.pla
     }
    void crearArchivoTexto()
     {
