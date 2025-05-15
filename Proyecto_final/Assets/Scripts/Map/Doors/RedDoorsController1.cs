@@ -8,11 +8,13 @@ public class RedDoorsController : MonoBehaviour
      float openedTime = 2f;
     [SerializeField] RedDoorsController partnerDoor;
 
+    Animator anim;
     enum DOORSTATES {OPENED, CLOSED};
     DOORSTATES currentState = DOORSTATES.CLOSED;
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         CloseDoor();
     }
 
@@ -44,6 +46,7 @@ public class RedDoorsController : MonoBehaviour
     {
         if (collision.CompareTag("Missile"))
         {
+
             OpenDoor();
             partnerDoor.OpenDoor();
         }
@@ -60,12 +63,14 @@ public class RedDoorsController : MonoBehaviour
 
     public void OpenDoor()
     {
+        anim.SetBool("Open", true);
         currentState = DOORSTATES.OPENED;
         GetComponent<BoxCollider2D>().enabled = false;
         openedTime = 0;
     }
     private void CloseDoor()
     {
+        anim.SetBool("Open", false);
         currentState = DOORSTATES.CLOSED;
         GetComponent<BoxCollider2D>().enabled = true;
     }

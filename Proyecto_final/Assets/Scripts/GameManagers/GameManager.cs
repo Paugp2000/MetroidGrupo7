@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int missiles;
 
     [SerializeField] private AudioClip introMusic;
+    
     private AudioSource audioSource;
 
     public bool enableMissiles;
@@ -88,6 +89,11 @@ public class GameManager : MonoBehaviour
     public void AddMissile(int missilesNumber)
     {
         missiles += missilesNumber;
+    }
+
+    public int GetMissiles()
+    {
+        return missiles;
     }
 
     public void TakeEnergy(int damage)

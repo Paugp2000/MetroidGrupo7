@@ -88,7 +88,7 @@ AnimationClip:
   - time: 7
     functionName: FinIntro
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 7866f18dfee6848449d9bdad4229db8b, type: 3}
+    objectReferenceParameter: {fileID: 11500000, guid: 03cff0e421de6fa4da8f1b1093eac419, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
