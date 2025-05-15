@@ -12,6 +12,7 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
     private Vector2 thirdPosition = new Vector2(0, -142);  // Cerrar juego
     private Vector2 fourthPosition = new Vector2(0, -193); // Nueva cuarta posición
     private Vector2 fivePosition = new Vector2(0, -242); // Nueva cuarta posición
+    private Vector2 sixPosition = new Vector2(0, -289); // Nueva cuarta posición
     private int moveState = 0; // 0 = original, 1 = first, 2 = second, 3 = third, 4 = fourth
 
     public InputActionAsset inputActionsMapping;
@@ -39,6 +40,7 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
             thirdPosition.x = originalPosition.x;
             fourthPosition.x = originalPosition.x;
             fivePosition.x = originalPosition.x;
+            sixPosition.x = originalPosition.x;
         }
     }
 
@@ -51,7 +53,7 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
                 audioSource.PlayOneShot(selectorSound);
             }
 
-            if (moveState < 5)
+            if (moveState < 6)
             {
                 moveState++;
                 UpdatePosition();
@@ -92,6 +94,9 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
                     SceneManager.LoadScene("PlayerStats");
                     break;
                 case 5:
+                    SceneManager.LoadScene("GameAnalitics");
+                    break;
+                case 6:
                     Application.Quit();
                     UnityEditor.EditorApplication.isPlaying = false;
                     break;
@@ -120,6 +125,9 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
                 break;
             case 5:
                 imageTransform.anchoredPosition = fivePosition;
+                break;
+            case 6:
+                imageTransform.anchoredPosition = sixPosition;
                 break;
         }
     }
