@@ -1320,8 +1320,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1330337722}
   - component: {fileID: 1330337724}
-  - component: {fileID: 1330337725}
   - component: {fileID: 1330337723}
+  - component: {fileID: 1330337725}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1454,10 +1454,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1330337721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f2ded7ba0bc9f94d98b26ed75defd13, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ac0de8182505c42b573a77df5f18dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textoMisiles: {fileID: 0}
+  textFinalTime: {fileID: 1330337723}
 --- !u!1 &1963884049
 GameObject:
   m_ObjectHideFlags: 0
