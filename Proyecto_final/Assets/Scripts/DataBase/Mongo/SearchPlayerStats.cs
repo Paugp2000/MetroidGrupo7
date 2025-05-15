@@ -13,12 +13,21 @@ public class SearchPlayerStats : MonoBehaviour
     [SerializeField] private TMP_InputField playerNameInputField;
 
     string playerName;
-
-    int gameKills;
-    int gameMissilesShoots;
-    int gamePowerBeamsShoots;
-    int gameJumps;
+    string playersName;
     int gamesPlayed;
+    int gameJumps;
+    int gamePowerBeamsShoots;
+    int gameMissilesShoots;
+    int gameKills;
+
+
+    [SerializeField] TMP_Text PlayerNameText;
+    [SerializeField] TMP_Text GamesPlayedText;  
+    [SerializeField] TMP_Text JumpsText;
+    [SerializeField] TMP_Text PowerBeamShootsText;
+    [SerializeField] TMP_Text MissileShootsText;
+    [SerializeField] TMP_Text KillsText;
+
 
     private MongoClient client;
     private IMongoDatabase database;
@@ -52,11 +61,19 @@ public class SearchPlayerStats : MonoBehaviour
         if (playerData != null)
         {
 
+            playersName = playerData.GetValue("playerName").ToString();
             gamesPlayed = playerData.GetValue("gamesPlayed").ToInt32();
             gameKills = playerData.GetValue("totalKills").ToInt32();
             gameMissilesShoots = playerData.GetValue("missilesShooted").ToInt32();
             gamePowerBeamsShoots = playerData.GetValue("powerBeamsShooted").ToInt32();
             gameJumps = playerData.GetValue("jumps").ToInt32();
+
+            PlayerNameText.text = playersName;
+            GamesPlayedText.text = ((int)gamesPlayed).ToString();
+            JumpsText.text = ((int)gameJumps).ToString();
+            PowerBeamShootsText.text = ((int)gamePowerBeamsShoots).ToString();
+            MissileShootsText.text = ((int)gameMissilesShoots).ToString();
+            KillsText.text = ((int)gameKills).ToString();
 
             Debug.Log("Games played: " + gamesPlayed);
             Debug.Log("Number of kills: " + gameKills);
@@ -66,6 +83,13 @@ public class SearchPlayerStats : MonoBehaviour
         }
         else
         {
+            PlayerNameText.text = "Null";
+            GamesPlayedText.text = "Null";
+            JumpsText.text = "Null";
+            PowerBeamShootsText.text = "Null";
+            MissileShootsText.text = "Null";
+            KillsText.text = "Null";
+
             Debug.Log("Player not found");
         }
 
