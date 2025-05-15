@@ -6,7 +6,7 @@ using UnityEngine;
 public class AnaliticsManager : MonoBehaviour
 {
     private string playerName;
-    private float finalTime = 0;
+    private double finalTime = 0;
     private int jumpsNumber = 0;
     private int PowerBeamShootsNumber = 0;
     private int missileShootsNumber = 0;
@@ -44,6 +44,7 @@ public class AnaliticsManager : MonoBehaviour
 
     public string GetPlayerName()
     {
+        playerName = "Developer";
         return playerName;
     }
 
@@ -53,7 +54,7 @@ public class AnaliticsManager : MonoBehaviour
         finalTime = time;
     }
 
-    public float GetFinalTime()
+    public double GetFinalTime()
     {
         return finalTime;
     }

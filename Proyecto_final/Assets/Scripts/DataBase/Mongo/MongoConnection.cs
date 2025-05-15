@@ -28,9 +28,7 @@ public class MongoConnection : MonoBehaviour
     }
 
 
-    async void Start()
-    {
-    }
+    
 
     public void SaveGameAnalitics()
     {
@@ -51,11 +49,12 @@ public class MongoConnection : MonoBehaviour
 
         var document = new BsonDocument
         {
-            { "Game Time ", AnaliticsManager.Instance.GetFinalTime()},
-            { "Number of jumps ", AnaliticsManager.Instance.GetJumps()},
-            { "Power beam shoots ", AnaliticsManager.Instance.GetPowerBeamsShootsNumber()},
-            { "Missile shoots ", AnaliticsManager.Instance.GetMissileShootsNumbers()},
-            { "Number of kills ", AnaliticsManager.Instance.GetKillsNumber()}
+            { "PlayerName", AnaliticsManager.Instance.GetPlayerName()},
+            { "Game time", AnaliticsManager.Instance.GetFinalTime()},
+            { "Number of jumps", AnaliticsManager.Instance.GetJumps()},
+            { "Power beam shoots", AnaliticsManager.Instance.GetPowerBeamsShootsNumber()},
+            { "Missile shoots", AnaliticsManager.Instance.GetMissileShootsNumbers()},
+            { "Number of kills", AnaliticsManager.Instance.GetKillsNumber()}
         };
         usersCollection.InsertOne(document);
         Debug.Log("Mongo Connection Enviado");

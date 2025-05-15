@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIFinalTime : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textFinalTime;
-    float finalTime;
+    double finalTime;
     private void Update()
     {
 
