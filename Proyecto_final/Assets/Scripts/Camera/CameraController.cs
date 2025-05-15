@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        currentState = STATES.VERTICAL;
+        currentState = STATES.HORIZONTAL;
         nextState = STATES.HORIZONTAL;
     }
     private void Update()

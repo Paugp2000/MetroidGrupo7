@@ -1,6 +1,8 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -28,9 +30,12 @@ public class MongoConnection : MonoBehaviour
     }
 
 
-    
 
     public void SaveGameAnalitics()
+    {
+        StartCoroutine(_SaveGameAnalitics());
+    }
+    public IEnumerator _SaveGameAnalitics()
     {
         Debug.Log("Mongo Connection recivido");
 
@@ -58,5 +63,6 @@ public class MongoConnection : MonoBehaviour
         };
         usersCollection.InsertOne(document);
         Debug.Log("Mongo Connection Enviado");
+        yield return null;
     }
 }
