@@ -35,6 +35,7 @@ public class MongoConnection : MonoBehaviour
     {
         StartCoroutine(_SaveGameAnalitics());
     }
+
     public IEnumerator _SaveGameAnalitics()
     {
         Debug.Log("Mongo Connection recivido");
@@ -61,6 +62,7 @@ public class MongoConnection : MonoBehaviour
             { "Missile shoots", AnaliticsManager.Instance.GetMissileShootsNumbers()},
             { "Number of kills", AnaliticsManager.Instance.GetKillsNumber()}
         };
+
         usersCollection.InsertOne(document);
         Debug.Log("Mongo Connection Enviado");
         yield return null;
