@@ -7,7 +7,7 @@ public class SelecctionMod : MonoBehaviour
     public RectTransform imageTransform; // Asigna tu imagen aquí desde el Inspector
     public Vector2 movedPosition = new Vector2(0, -79); // Posición a la que se moverá hacia abajo
     private Vector2 originalPosition;
-    private bool isMoved = false; // Para saber si la imagen ya está movida
+    
 
     void Start()
     {
@@ -32,14 +32,14 @@ public class SelecctionMod : MonoBehaviour
 
             // Mueve la imagen hacia abajo, pero no más allá de -79
             imageTransform.anchoredPosition = targetPosition;
-            isMoved = true;
+            
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             // Si ya se movió, la imagen vuelve a la posición original
             imageTransform.anchoredPosition = originalPosition;
-            isMoved = false;
+            
         }
 
         // Cambiar de escena dependiendo de la posición Y de la imagen

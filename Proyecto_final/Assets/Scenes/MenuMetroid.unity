@@ -158,6 +158,7 @@ MonoBehaviour:
   - Opciones
   - Controles
   - LeaderBoard
+  - PlayerStats
 --- !u!82 &206895507
 AudioSource:
   m_ObjectHideFlags: 0
