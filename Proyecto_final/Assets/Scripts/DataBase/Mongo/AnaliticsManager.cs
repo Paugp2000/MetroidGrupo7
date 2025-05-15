@@ -44,7 +44,6 @@ public class AnaliticsManager : MonoBehaviour
 
     public string GetPlayerName()
     {
-        playerName = "Developer";
         return playerName;
     }
 
