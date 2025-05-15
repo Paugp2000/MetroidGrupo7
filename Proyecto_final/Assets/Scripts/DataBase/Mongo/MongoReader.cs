@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using TMPro;
 using UnityEngine;
 
 public class MongoReader : MonoBehaviour
@@ -15,6 +16,11 @@ public class MongoReader : MonoBehaviour
     List<int> missileShoots = new();
     List<int> kills = new();
 
+    [SerializeField] TMP_Text avgTimeText;
+    [SerializeField] TMP_Text avgJumpsText;
+    [SerializeField] TMP_Text avgPowerBeamShootsText;
+    [SerializeField] TMP_Text avgMissileShootsText;
+    [SerializeField] TMP_Text avgKillsText;
 
     double averageTime;
     double averageJumps;
@@ -50,7 +56,7 @@ public class MongoReader : MonoBehaviour
 
         foreach (var document in allData)
         {
-            times.Add(document.GetValue("Game Time").ToDouble());
+            times.Add(document.GetValue("Game time").ToDouble());
             jumps.Add(document.GetValue("Number of jumps").ToInt32());
             powerBeamShoots.Add(document.GetValue("Power beam shoots").ToInt32());
             missileShoots.Add(document.GetValue("Missile shoots").ToInt32());
@@ -66,6 +72,23 @@ public class MongoReader : MonoBehaviour
         averageMissileShoots = missileShoots.Average();
         averageKills = kills.Average();
         //============AVERAGE CALCULATIONS============//
+
+
+        //============TIME FORMAT============//
+        int hours = (int)(averageTime / 3600);
+        int minutes = (int)((averageTime % 3600) / 60);
+        int seconds = (int)(averageTime % 60);
+        int milliseconds = (int)((averageTime * 10) % 10);
+        string formattedTime = string.Format("{0:00}:{1:00}:{2:00}.{3:000}", hours, minutes, seconds, milliseconds);
+        //============TIME FORMAT============//
+
+        avgTimeText.text = formattedTime;
+
+
+        avgJumpsText.text = ((int)averageJumps).ToString();
+        avgPowerBeamShootsText.text = ((int)averagePowerBeamShoots).ToString();
+        avgMissileShootsText.text = ((int)averageMissileShoots).ToString();
+        avgKillsText.text = ((int)averageKills).ToString();
 
 
         Debug.Log("AVG Times " + averageTime);

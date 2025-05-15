@@ -159,6 +159,7 @@ MonoBehaviour:
   - Controles
   - LeaderBoard
   - PlayerStats
+  - GameAnalitics
 --- !u!82 &206895507
 AudioSource:
   m_ObjectHideFlags: 0
