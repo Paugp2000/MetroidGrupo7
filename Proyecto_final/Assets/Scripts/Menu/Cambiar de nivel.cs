@@ -8,10 +8,10 @@ public class Cambiardenivel : MonoBehaviour
     {
         if (corutinaCambioEscena == null)
         {
-            corutinaCambioEscena = StartCoroutine(_CambiarEscenaConDelay(nomEscena));
+            corutinaCambioEscena = StartCoroutine(_CambiarEscenaConDelay(nomEscena,1f));
         }
     }
-    IEnumerator _CambiarEscenaConDelay(string nomEscena)
+    IEnumerator _CambiarEscenaConDelay(string nomEscena, float delay)
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(nomEscena);
