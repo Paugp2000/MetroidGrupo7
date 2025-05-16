@@ -9,6 +9,7 @@ public class Skree : Enemy
     [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject target;
 
+    private bool attacking;
     private Transform positionPlayer;
 
     private Rigidbody2D rb;
@@ -16,6 +17,7 @@ public class Skree : Enemy
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        attacking = false;
     }
 
     private void Update()
@@ -24,8 +26,13 @@ public class Skree : Enemy
         {
             rb.velocity = Vector3.zero;
         }
-        else
+        else if (attacking)
         {
+            StartDescent();
+            positionPlayer = target.transform;
+            ControlRaycast();
+        }
+        else{
             positionPlayer = target.transform;
             ControlRaycast();
         }
@@ -40,6 +47,7 @@ public class Skree : Enemy
         if (playerHit.collider != null)
         {
             if (playerHit.collider.CompareTag("Player")){
+                attacking = true;
                 StartDescent();
                 if (playerHit.collider.transform.position.x > transform.position.x)
                 {
@@ -54,6 +62,7 @@ public class Skree : Enemy
 
         if (groundHit.collider != null)
         {
+            attacking = true;
             Debug.Log("suelo tocao");
             rb.velocity = Vector2.zero;
             Invoke("Dye", 1);
@@ -68,7 +77,6 @@ public class Skree : Enemy
     void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2DInternal(collision);
-        
         if (collision.gameObject.CompareTag("Player"))
         {
             Invoke("Dye", 1);

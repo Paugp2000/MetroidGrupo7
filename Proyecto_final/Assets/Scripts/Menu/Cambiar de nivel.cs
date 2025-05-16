@@ -11,6 +11,11 @@ public class Cambiardenivel : MonoBehaviour
             corutinaCambioEscena = StartCoroutine(_CambiarEscenaConDelay(nomEscena,1f));
         }
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
     IEnumerator _CambiarEscenaConDelay(string nomEscena, float delay)
     {
         yield return new WaitForSeconds(delay);
