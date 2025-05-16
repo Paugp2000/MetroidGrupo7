@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     public void AddEnergy()
     {
-        energy += 5;
+        energy += 3;
         if (energy > maxEnergy)
         {
             energy = maxEnergy;
