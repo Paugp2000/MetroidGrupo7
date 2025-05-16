@@ -1615,6 +1615,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7322318899764229732, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
   m_PrefabInstance: {fileID: 4376477823280580778}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &188330272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6360001092446346734, guid: 73c95199d97e1644083e41617e5240e4, type: 3}
+  m_PrefabInstance: {fileID: 978824808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &195524731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,10 +2426,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 48978375}
     m_Modifications:
-    - target: {fileID: 2197074638854168280, guid: 7e47073349499ab44a1bcf5bbc63816f, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5539783701924093153, guid: 7e47073349499ab44a1bcf5bbc63816f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -5661,7 +5668,7 @@ Transform:
   m_GameObject: {fileID: 972416685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 67.91381, y: 63.124954, z: 0.34162757}
+  m_LocalPosition: {x: 49.9, y: 83.02, z: 0.34162757}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6040,6 +6047,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1130348088401146495, guid: 73c95199d97e1644083e41617e5240e4, type: 3}
+      propertyPath: textoMisiles
+      value: 
+      objectReference: {fileID: 188330272}
     - target: {fileID: 6346403367060553452, guid: 73c95199d97e1644083e41617e5240e4, type: 3}
       propertyPath: m_Name
       value: CanvasInterfaz
@@ -6124,11 +6135,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8385802608016134324, guid: 73c95199d97e1644083e41617e5240e4, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2125783555818712946, guid: 73c95199d97e1644083e41617e5240e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -39552,11 +39560,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2777104059626740686, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.48
+      value: 49.61
       objectReference: {fileID: 0}
     - target: {fileID: 2777104059626740686, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.99
+      value: 83.76
       objectReference: {fileID: 0}
     - target: {fileID: 2777104059626740686, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: m_LocalPosition.z

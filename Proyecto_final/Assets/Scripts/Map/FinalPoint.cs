@@ -8,7 +8,7 @@ public class FinalPoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameManager.Instance.StopTimeOnGame();
-        AnaliticsManager.Instance.SaveAnalitics();
+        //AnaliticsManager.Instance.SaveAnalitics();
         SceneManager.LoadScene("SceneWin");
     }
 }
