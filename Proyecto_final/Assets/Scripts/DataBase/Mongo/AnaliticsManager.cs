@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class AnaliticsManager : MonoBehaviour
 {
+
+
+
     private string playerName;
     private double finalTime = 0;
     private int jumpsNumber = 0;
