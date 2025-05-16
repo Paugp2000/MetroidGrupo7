@@ -8,7 +8,7 @@ public class TXTCreator : MonoBehaviour
 {
     [SerializeField] private TMP_InputField saveName;
     private string nameSaved;
-    private string rutaO = @"D:\MetroidProyecto\MetroidGrupo7\MetroidGrupo7\Proyecto_final\Metroid.txt";
+    private string rutaO = @"/MetroidProyecto/MetroidGrupo7/MetroidGrupo7/Proyecto_final/Metroid.txt";
     private void Awake()
     {
         crearArchivoTexto();
@@ -36,7 +36,7 @@ public class TXTCreator : MonoBehaviour
     void crearArchivoTexto()
     {
         if(!File.Exists(rutaO)) { 
-        string ruta = @"D:\MetroidProyecto\MetroidGrupo7\MetroidGrupo7\Proyecto_final\Metroid.txt";
+        string ruta = @"/MetroidProyecto/MetroidGrupo7/MetroidGrupo7/Proyecto_final/Metroid.txt";
         File.Create(ruta);
         }
     }

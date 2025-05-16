@@ -97,7 +97,7 @@ public class AnaliticsManager : MonoBehaviour
     // KillsNumber
     public void AddKill()
     {
-        missileShootsNumber++;
+        KillsNumber++;
     }
 
     public int GetKillsNumber()

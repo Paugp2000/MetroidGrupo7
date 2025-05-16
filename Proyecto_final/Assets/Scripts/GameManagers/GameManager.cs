@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
 
     public bool enableMissiles;
 
-    private Vector3 lastCheckpoint;
-
     private float timeOnGame;
 
     public static GameManager Instance;
@@ -29,6 +27,10 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         timeOnGame = 0; // Reinicia timeOnGame cuando se carga una escena
+        audioSource = GetComponent<AudioSource>();
+        energy = 30;
+        missiles = 0;
+        enableMissiles = false;
     }
 
     private void Awake()
@@ -53,23 +55,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        lastCheckpoint = new Vector3(0.5f, -1, 0);
-        energy = 30;
-        missiles = 0;
-        enableMissiles = false;
     }
 
     private void Update()
     {
         timeOnGame += Time.deltaTime;
-    }
-
-    public void SetLastCheckpoint(Vector3 newCheckpoint)
-    {
-        Debug.Log("Seted");
-        lastCheckpoint = newCheckpoint;
-        Debug.Log(lastCheckpoint);
     }
 
     public int GetEnergy()
