@@ -21,9 +21,15 @@ public class GameManager : MonoBehaviour
     private float timeOnGame;
 
     public static GameManager Instance;
-
-
-
+    
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        timeOnGame = 0; // Reinicia timeOnGame cuando se carga una escena
+    }
 
     private void Awake()
     {
@@ -51,7 +57,6 @@ public class GameManager : MonoBehaviour
         lastCheckpoint = new Vector3(0.5f, -1, 0);
         energy = 30;
         missiles = 0;
-        timeOnGame = 0;
         enableMissiles = false;
     }
 
@@ -74,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     public void AddEnergy()
     {
-        energy += 5;
+        energy += 3;
         if (energy > maxEnergy)
         {
             energy = maxEnergy;

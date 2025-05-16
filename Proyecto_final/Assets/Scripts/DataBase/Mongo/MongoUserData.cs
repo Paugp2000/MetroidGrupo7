@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MongoUserData : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class MongoUserData : MonoBehaviour
         Debug.Log(playerNameInputField.text);
         AnaliticsManager.Instance.setPlayerName(playerNameInputField.text);
         AnaliticsManager.Instance.SaveAnalitics();
+
+        SceneManager.LoadScene("Inicio");
+
     }
 
 
