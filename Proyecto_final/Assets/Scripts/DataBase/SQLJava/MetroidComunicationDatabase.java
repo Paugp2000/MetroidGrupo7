@@ -18,7 +18,7 @@ import java.sql.*;
 public class MetroidComunicationDatabase {
 
     public static File buscarFitxer(String nomFitx) {
-        File fitx = new File ("/MetroidProyecto/MetroidGrupo7/MetroidGrupo7/Proyecto_final/Metroid.txt");
+        File fitx = new File ("/MetroidProyecto/MetroidGrupo7/MetroidGrupo7/Proyecto_final/Assets/StreamingAssets/Metroid.txt");
         return fitx;
     }
 

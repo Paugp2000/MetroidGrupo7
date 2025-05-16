@@ -77,7 +77,7 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
             switch (moveState)
             {
                 case 0:
-                    SceneManager.LoadScene("MainLevel");
+                    SceneManager.LoadScene("IntroGame");
                     break;
                 case 1:
                     SceneManager.LoadScene("Opciones");
