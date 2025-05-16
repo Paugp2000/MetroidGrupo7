@@ -11,4 +11,8 @@ public class SaveNamePlayer : MonoBehaviour
         playerName = name;
         Debug.Log("Name : " + playerName);
     }
+    public string getNamePlayer()
+    {
+        return playerName;
+    }
 }
