@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Controles.unity
     guid: 28cec43c2a088c4459948d39a40e7ebf
   - enabled: 1
+    path: Assets/Scenes/IntroGame.unity
+    guid: c2ad623e66a35a946b00083732402349
+  - enabled: 1
     path: Assets/Scenes/SceneWin.unity
     guid: d13b85b2ea7d92245b9be99e96ff91d2
   - enabled: 1
