@@ -8,7 +8,6 @@ public class TXTCreator : MonoBehaviour
 {
     [SerializeField] private TMP_InputField saveName;
     private string nameSaved;
-    private string rutaO = @"/MetroidProyecto/MetroidGrupo7/MetroidGrupo7/Proyecto_final/Metroid.txt";
     private void Awake()
     {
         crearArchivoTexto();
@@ -35,14 +34,14 @@ public class TXTCreator : MonoBehaviour
 
     void crearArchivoTexto()
     {
-        if(!File.Exists(rutaO)) { 
-        string ruta = @"/MetroidProyecto/MetroidGrupo7/MetroidGrupo7/Proyecto_final/Metroid.txt";
-        File.Create(ruta);
+        if(!File.Exists(Application.streamingAssetsPath)) {
+            string ruta = Application.streamingAssetsPath + "/Metroid.txt";
+            
         }
     }
     void añadirTexto(string userName, string formattedTime)
     {
-        using (StreamWriter sw = new StreamWriter(rutaO, true)) 
+        using (StreamWriter sw = new StreamWriter(Application.streamingAssetsPath + "/Metroid.txt", true)) 
         {
             sw.WriteLine(userName + " " + formattedTime);
         }
