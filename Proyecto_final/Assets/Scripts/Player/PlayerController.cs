@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     float speed, jumpImpulse;
     //==========END SPEEDS & FORCES==========//
 
+    //============SOUND===========\\
+
     [SerializeField] private AudioClip jumpSound;  // Aquí agregamos una variable para el sonido
     [SerializeField] private AudioClip deadSound;  // Aquí agregamos una variable para el sonido
     [SerializeField] private AudioClip musicaJuego;  // Aquí agregamos una variable para el sonido
@@ -22,7 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private string sceneName = "NombreDeLaEscena"; // Cambia esto por el nombre de la escena
     [SerializeField] private float delay = 5f; // Tiempo de espera en segundos
 
-    public bool canMove = true;
+    //==========END SOUND==========//
+
+
 
 
     //============RIGIDBODY===========\\
@@ -37,6 +41,8 @@ public class PlayerController : MonoBehaviour
     const float MIN_JUMP_TIME = 0.15f;
 
     const int JUMP_MOBILITY_PERCENT = 75;
+
+    public bool canMove = true;
 
     [SerializeField]
     public InputActionAsset inputActionsMapping;
@@ -391,6 +397,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(7);
         Debug.Log("Puedes empezar");
         CurrentState = STATES.ONFLOOR;
+        audioSource.enabled = true;
     }
 
     bool Transitioning()

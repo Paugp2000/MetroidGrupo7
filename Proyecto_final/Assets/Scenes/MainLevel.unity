@@ -6466,14 +6466,14 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180435680}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: dca0151e7b40783429e21ab3f40bcdc1, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -37984,11 +37984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2777104059626740686, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.66
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 2777104059626740686, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.82
+      value: -0.97
       objectReference: {fileID: 0}
     - target: {fileID: 2777104059626740686, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38061,7 +38061,7 @@ PrefabInstance:
     - target: {fileID: 2961138207705999484, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: musicaJuego
       value: 
-      objectReference: {fileID: 8300000, guid: dca0151e7b40783429e21ab3f40bcdc1, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2961138207705999484, guid: 98521408ccf587840b13c761c7b1f7b5, type: 3}
       propertyPath: UntouchableTime
       value: 3

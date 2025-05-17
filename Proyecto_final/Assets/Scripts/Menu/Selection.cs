@@ -93,7 +93,7 @@ public class ImageMoverAndSceneLoader : MonoBehaviour
                     break;
                 case 5:
                     Application.Quit();
-                    UnityEditor.EditorApplication.isPlaying = false;
+                    //UnityEditor.EditorApplication.isPlaying = false;
                     break;
             }
         }
