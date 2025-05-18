@@ -27,8 +27,6 @@ public class PlayerController : MonoBehaviour
     //==========END SOUND==========//
 
 
-
-
     //============RIGIDBODY===========\\
     public Rigidbody2D rb2D;
     //==========END RIGIDBODY==========//
@@ -90,16 +88,24 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+
+        //============INPUT ACTIONS============\\
         inputActionsMapping.Enable();
         horizontal_ia = inputActionsMapping.FindActionMap("Movement").FindAction("Horizontal");
         jump_ia = inputActionsMapping.FindActionMap("Movement").FindAction("Jump");
+
+
+        //============ANIMATOR============\\
         anim = GetComponent<Animator>();
 
+
+        //============RIGIDBODY============\\
         rb2D = GetComponent<Rigidbody2D>();
 
-        
 
 
+
+        //============SINGELTON CHECK============\\
         if (Instance == null)
         {
             Instance = this;
@@ -112,21 +118,24 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        CurrentState = STATES.APPEARING;
-        StartCoroutine(Appear());
-        untouchableTime = maxUntouchableTime;
-        rb2D.isKinematic = false;
 
-        // Obtén el componente AudioSource
-        audioSource = GetComponent<AudioSource>();
+        CurrentState = STATES.APPEARING; //SET THE FIRST STATE
+
+        StartCoroutine(Appear()); //CALL TO THE COROUINE "Appear"
+
+        untouchableTime = maxUntouchableTime; //SET THE UNTOUCHABLE TIME TO THE MAX TIME
+
+        rb2D.isKinematic = false; //SET KINEMATIC
+
+        audioSource = GetComponent<AudioSource>(); //GET AUDIO SOURCE
 
         
     }
 
     private void Update()
     {
-        Debug.DrawLine(LeftRaycastOrigin.position, LeftRaycastOrigin.position - LeftRaycastOrigin.up * 0.05f, Color.red);
-        Debug.DrawLine(RightRaycastOrigin.position, RightRaycastOrigin.position - RightRaycastOrigin.up * 0.05f, Color.red);
+
+        //============STATE MACHINE============\\
         switch (CurrentState)
         {
             case STATES.ONFLOOR:
@@ -153,16 +162,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //======================================= STATES FUNCTIONS =======================================\\
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\
+    //======================================================================= STATES FUNCTIONS =======================================================================\\
     void OnFloor()
     {
-        jumpTime = MIN_JUMP_TIME;
+        jumpTime = MIN_JUMP_TIME;      //SET THE JUMP TIME TO THE MINIMUM
 
-        float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());
+        float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());        //GET THE HORIZONTAL VALUE
 
-        rb2D.velocity = new Vector2(speed * horizontalDirection, rb2D.velocity.y);
+        rb2D.velocity = new Vector2(speed * horizontalDirection, rb2D.velocity.y);      //SET THE VELOCITY
         anim.SetFloat("Run", Math.Abs(rb2D.velocity.magnitude));
 
+
+        //============DIRECTION CHECK TO ROTATE THE CHARACTER============\\
         if (horizontalDirection > 0)
         {
             transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
@@ -174,27 +186,34 @@ public class PlayerController : MonoBehaviour
         }
 
 
+
+        //============JUMP TRIGGER============\\
         if (jump_ia.triggered)
         {
-            //Reproduce el sonido si el AudioSource está asignado
-            if (audioSource != null && jumpSound != null)
+            if (audioSource != null && jumpSound != null) //Reproduce el sonido si el AudioSource está asignado
             {
                 audioSource.PlayOneShot(jumpSound);
             }
-            rb2D.AddForce(new Vector2(0, 1) * jumpImpulse, ForceMode2D.Impulse);
-            AnaliticsManager.Instance.AddJump();
+
+            rb2D.AddForce(new Vector2(0, 1) * jumpImpulse, ForceMode2D.Impulse);        //SET JUMP FORCE
+            AnaliticsManager.Instance.AddJump();        //ADD ONE JUMP TO THE ANALITICS
         }
 
+
+        //============POSSIBLE TRANSITIONS============\\
         if (ToOnAir())
             return;
     }
 
+
     void OnAir()
     {
-        jumpTime -= Time.deltaTime;
+        jumpTime -= Time.deltaTime;     //WHILE ONAIR "jumpTime" DECREASES TO HAVE A MINIMUM TIME OF JUMP
 
-        float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());
-        
+        float horizontalDirection = Mathf.RoundToInt(horizontal_ia.ReadValue<float>());     //GET THE HORIZONTAL VALUE
+
+
+        //============DIRECTION CHECK TO ROTATE THE CHARACTER============\\
         if (horizontalDirection > 0)
         {
             transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
@@ -205,28 +224,36 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
         }
 
-        //rb2D.velocity = new Vector2(speed * (horizontalDirection/100 * JUMP_MOBILITY_PERCENT), rb2D.velocity.y);
 
+
+        //============SMOOTH JUMP============\\
         if (rb2D.velocity.y < 0)
         { 
         }
-        else if ((jump_ia.WasReleasedThisFrame() && rb2D.velocity.y > 0 && jumpTime <= 0) || (jumpTime <= 0 && !jump_ia.IsPressed())) {
+        //this condition secures to have a minimum time on the air AND can stop going up if the player don't have the jump triggered when jumpTime is over
+        else if ((jump_ia.WasReleasedThisFrame() && rb2D.velocity.y > 0 && jumpTime <= 0) || (jumpTime <= 0 && !jump_ia.IsPressed())) {   
+            
             rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
-           
         }
 
         anim.SetBool("Salta", true);
 
 
 
-        rb2D.velocity = new Vector2(speed * (horizontalDirection / 100 * JUMP_MOBILITY_PERCENT), rb2D.velocity.y);
+        rb2D.velocity = new Vector2(speed * (horizontalDirection / 100 * JUMP_MOBILITY_PERCENT), rb2D.velocity.y);      //ADJUST HORIZONTAL MOVEMENT MOBILITY ON AIR
+
+
+        //============POSSIBLE TRANSITIONS============\\
         if (ToOnFloor())
             return;
     }
 
     void Hurted()
     {
-        Untouchable = true;
+        Untouchable = true;     //IF IT IS HURT BECOMES UNTOUCHABLE
+
+
+        //============STAY UNTOUCHABLE WHILE UNTOUCHABLE TIME IS NOT OVER============\\
         if (untouchableTime > 0)
         {
             untouchableTime -= Time.deltaTime;
@@ -234,7 +261,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             Untouchable = false;
-            untouchableTime = maxUntouchableTime;
+            untouchableTime = maxUntouchableTime;       //SET UNTOUCHABLE TIME TO MAXIMUM FOR THE NEXT TIME
+
+            //============POSSIBLE TRANSITIONS============\\
             if (ToOnAir())
                 return;
 
@@ -243,14 +272,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     void Dead()
     {
-        rb2D.velocity = Vector2.zero;
-        rb2D.isKinematic = true;
-        //Animacion Muerte
-        anim.SetTrigger("Dead");
-        //Sonido Muerte 
-        if (deadSound != null)
+        rb2D.velocity = Vector2.zero;       //SET VELOCITY TO STOP THE CHARACTER
+
+        rb2D.isKinematic = true;        //SET KINEMATIC TRUE TO DON'T MOVE THE CHARACTER
+
+        anim.SetTrigger("Dead");        //Animacion Muerte
+
+        if (deadSound != null)      //Sonido Muerte
         {
             AudioSource.PlayClipAtPoint(deadSound, transform.position);
         }
@@ -265,6 +296,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+
+            //============POSSIBLE TRANSITIONS============\\
             if (ToOnAir())
                 return;
 
@@ -283,6 +316,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+
+            //============POSSIBLE TRANSITIONS============\\
             if (ToOnAir())
                 return;
 
@@ -292,23 +327,25 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
     void Appearing()
     {
+        //THE PLAYER CAN'T DO ANYTHING WHILE APPEARING
     }
 
+    //==================================================================== END STATES FUNCTIONS ======================================================================//
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 
-
-        //======================================= END STATES FUNCTIONS =======================================//
-
-
-
-    //========================================== TRANSITIONS =========================================\\
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\
+    //========================================================================== TRANSITIONS =========================================================================\\
     bool ToOnFloor()
     {
+
+        //============CHECK IF DETECTING FLOOR============\\
         if (DetectFloor())
         {
             anim.SetBool("Salta", false);
-            return true;
+            return true;        //SET TRUE BECAUSE IF IT IS TOUCHING FLOOR IT IS ON FLOOR
         }
         return false;
     }
@@ -316,20 +353,25 @@ public class PlayerController : MonoBehaviour
     {
         if (DetectFloor())
         {
-            return false;
+            return false;       //SET FALSE BECAUSE IF IT IS TOUCHING FLOOR IT IS NOT ON AIR
         }
         return true;
     }
 
-    //======================================== END TRANSITIONS =======================================//
+    //======================================================================== END TRANSITIONS =======================================================================//
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 
-    //========================================== DETECTIONS =========================================\\
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\
+    //========================================================================== DETECTIONS ==========================================================================\\
     bool DetectFloor()
     {
-        RaycastHit2D leftHit = Physics2D.Raycast(LeftRaycastOrigin.position, -LeftRaycastOrigin.up, 0.05f, MapLayer);
 
+        //============FLOOR RAYCASTS============\\
+        RaycastHit2D leftHit = Physics2D.Raycast(LeftRaycastOrigin.position, -LeftRaycastOrigin.up, 0.05f, MapLayer);
         RaycastHit2D rightHit = Physics2D.Raycast(RightRaycastOrigin.position, -RightRaycastOrigin.up, 0.05f, MapLayer);
 
+
+        //============RETURN VALUES CONDITIONS============\\
         if (leftHit || rightHit)
         {
             CurrentState = STATES.ONFLOOR;
@@ -344,6 +386,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        //============GET DAMAGE IF ENEMY TOUCH AND THE PLAYER IS NOT UNTOUCHABLE============\\
         if (collision.tag == "Enemy" && !Untouchable)
         {
             Debug.Log("Auch");
@@ -356,15 +400,21 @@ public class PlayerController : MonoBehaviour
             
         }
     }
-    //======================================== END DETECTIONS =======================================//
+    //======================================================================== END DETECTIONS ========================================================================//
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 
-    //======================================== EXTRA FUNCTIONS =======================================\\
 
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\
+    //======================================================================== EXTRA FUNCTIONS =======================================================================\\
+
+
+    //============PUSH THE PLAYER WHEN RECIVE DAMAGE============\\
     void Push(Vector3 pushOrigin)
     {
-        StartCoroutine(pushColorCoroutine());
-        rb2D.velocity = new Vector2(0, 0);
+        StartCoroutine(pushColorCoroutine());       
+        rb2D.velocity = new Vector2(0, 0);      //STOP THE CHARACTER
 
+        //============GET AWAY FROM THE PUSH ORIGIN============\\
         if (pushOrigin.x < transform.position.x)
         {
             rb2D.velocity = new Vector2(3, 3);
@@ -378,6 +428,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //============COROUTINE TO CHANGE COLOR WHEN TAKE DAMAGE============\\
     IEnumerator pushColorCoroutine()
     {
         GetComponent<SpriteRenderer>().color = new Color(255, 0.60f, 0.1f, 0.1f);
@@ -392,31 +443,36 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         GetComponent<SpriteRenderer>().color = Color.white;
     }
+
+
     IEnumerator Appear()
     {
-        yield return new WaitForSeconds(7);
-        Debug.Log("Puedes empezar");
-        CurrentState = STATES.ONFLOOR;
-        audioSource.enabled = true;
+        yield return new WaitForSeconds(7);     //WHAIT 7 SECONDS
+        Debug.Log("Puedes empezar a jugar");
+        CurrentState = STATES.ONFLOOR;      //SET STATE TO ONFLOOR
+        audioSource.enabled = true;     //ENABLE AUDIO SOURCE TO START THE BACKGROUD MUSIC
     }
+
 
     bool Transitioning()
     {
-        return true;
+        return true;        //RETURN TRUE TO KNOW WHEN PLAYER IS TRANSITIONING
     }
+
 
     private System.Collections.IEnumerator ChangeSceneAfterDelay()
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);      //CHANGE SCENE
     }
 
     public void FinIntro()
     {
-        if (audioSource != null && musicaJuego != null)
+        if (audioSource != null && musicaJuego != null)       //PLAYS MUSIC IF NOT NULL
         {
             audioSource.PlayOneShot(musicaJuego);
         }
     }
-    //======================================== END EXTRA FUNCTIONS =======================================//
+    //====================================================================== END EXTRA FUNCTIONS =====================================================================//
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 }

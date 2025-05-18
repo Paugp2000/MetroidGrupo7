@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class FinalPoint : MonoBehaviour
 {
+
+    //============STOP TIME AND CHANGE SCENE===========\\
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameManager.Instance.StopTimeOnGame();
-        //AnaliticsManager.Instance.SaveAnalitics();
         SceneManager.LoadScene("SceneWin");
     }
 }

@@ -14,7 +14,6 @@ public class Cambiardenivel : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-        //UnityEditor.EditorApplication.isPlaying = false;
     }
     IEnumerator _CambiarEscenaConDelay(string nomEscena, float delay)
     {

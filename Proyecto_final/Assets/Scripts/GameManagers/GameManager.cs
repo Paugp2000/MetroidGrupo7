@@ -6,62 +6,65 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private int maxEnergy = 99;
-    private int energy;
-    public int missiles;
+    //============ PLAYER STATS ============\\
+    private int maxEnergy = 99;       // MAXIMUM ENERGY LIMIT
+    private int energy;              // CURRENT ENERGY
+    public int missiles;            // CURRENT MISSILES COUNT
+    public bool enableMissiles;     // BOOL TO CHECK IF MISSILES ARE ENABLED
 
-    [SerializeField] private AudioClip introMusic;
-    
-    private AudioSource audioSource;
+    //============ AUDIO ============\\
+    [SerializeField] private AudioClip introMusic; // INTRO MUSIC CLIP
+    private AudioSource audioSource;               // AUDIO SOURCE COMPONENT
 
-    public bool enableMissiles;
+    //============ GAME TIME TRACKING ============\\
+    private float timeOnGame; // IN-GAME TIME PLAYER
 
-    private float timeOnGame;
-
+    //============ SINGLETON ============\\
     public static GameManager Instance;
-    
+
+    //============ SCENE EVENT REGISTRATION ============\\
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        timeOnGame = 0; // Reinicia timeOnGame cuando se carga una escena
-        audioSource = GetComponent<AudioSource>();
-        energy = 30;
-        missiles = 0;
-        enableMissiles = false;
+        SceneManager.sceneLoaded += OnSceneLoaded; // REGISTER TO SCENE LOAD EVENT
     }
 
+    //============ INITIALIZE VALUES ON SCENE LOAD ============\\
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        timeOnGame = 0;                  // RESET GAME TIME
+        audioSource = GetComponent<AudioSource>();      // GET AUDIOSOURCE
+        energy = 30;                     // INITIAL ENERGY
+        missiles = 0;                    // INITIAL MISSILES
+        enableMissiles = false;         // DISABLE MISSILES INITIALLY
+    }
+
+    //============SINGELTON CHECK============\\
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject); // PERSIST BETWEEN SCENES
+
             if (introMusic != null)
             {
-                AudioSource.PlayClipAtPoint(introMusic, transform.position);
-               
+                AudioSource.PlayClipAtPoint(introMusic, transform.position); // PLAY INTRO MUSIC
             }
-            
-
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // DESTROY DUPLICATE
         }
     }
 
-    private void Start()
-    {
-    }
 
+    //============ UPDATE GAME TIME ============\\
     private void Update()
     {
         timeOnGame += Time.deltaTime;
     }
 
+    //============ ENERGY METHODS ============\\
     public int GetEnergy()
     {
         return energy;
@@ -76,6 +79,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void TakeEnergy(int damage)
+    {
+        Debug.Log(energy);
+        energy -= damage;
+        Debug.Log(energy);
+
+        if (energy <= 0)
+        {
+            PlayerController.Instance.CurrentState = PlayerController.STATES.DEAD; // TRIGGER PLAYER DEATH
+        }
+    }
+
+    //============ MISSILE METHODS ============\\
     public void AddMissile()
     {
         missiles++;
@@ -91,28 +107,14 @@ public class GameManager : MonoBehaviour
         return missiles;
     }
 
-    public void TakeEnergy(int damage)
-    {
-        Debug.Log(energy);
-        energy -= damage;
-        Debug.Log(energy);
-        if (energy <= 0)
-        {
-            PlayerController.Instance.CurrentState = PlayerController.STATES.DEAD;
-            
-        }
-    }
-
     public void EnableMissiles()
     {
         enableMissiles = true;
     }
 
+    //============ ANALYTICS ============\\
     public void StopTimeOnGame()
     {
-        AnaliticsManager.Instance.SetTimeOnGame(timeOnGame);
+        AnaliticsManager.Instance.SetTimeOnGame(timeOnGame); // SEND TIME TO ANALYTICS
     }
-
-
 }
-

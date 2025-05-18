@@ -5,11 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerAbilityController : MonoBehaviour
 {
-    [SerializeField] Transform shootPoint, topShootPoint;
-    [SerializeField] GameObject powerBeam, missile;
+    //============SHOOT POINTS & PROJECTILES===========\\
+    [SerializeField] Transform shootPoint, topShootPoint; // SPAWN POINTS FOR SHOOTING
+    [SerializeField] GameObject powerBeam, missile; // PROJECTILE PREFABS
+    //==========END SHOOT POINTS & PROJECTILES==========//
 
+    //============INPUT ACTIONS===========\\
     [SerializeField] public InputActionAsset inputActionsMapping;
     InputAction lightShoot, missileShoot, pointingUp;
+    //==========END INPUT ACTIONS==========//
 
     Animator anim;
     bool isShooting = false;
@@ -18,10 +22,12 @@ public class PlayerAbilityController : MonoBehaviour
 
     private void Awake()
     {
+        //============SETUP INPUT ACTIONS===========\\
         lightShoot = inputActionsMapping.FindActionMap("Abilities").FindAction("LightShoot");
         missileShoot = inputActionsMapping.FindActionMap("Abilities").FindAction("MissileShoot");
         pointingUp = inputActionsMapping.FindActionMap("Pointing").FindAction("Up");
 
+        //============ANIMATOR AND RIGIDBODY COMPONENTS===========\\
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -32,14 +38,15 @@ public class PlayerAbilityController : MonoBehaviour
         bool isPointingUp = pointingUp.ReadValue<float>() > 0;
         bool isMoving = Mathf.Abs(rb.velocity.x) > 0.1f;
 
+        //============SHOOT INPUT===========\\
         if (PlayerController.Instance.CurrentState == PlayerController.STATES.ONFLOOR || PlayerController.Instance.CurrentState == PlayerController.STATES.ONAIR)
         {
             if (lightShoot.triggered)
             {
-                AnaliticsManager.Instance.AddPowerBeamsShoot();
+                AnaliticsManager.Instance.AddPowerBeamsShoot(); // LOG POWER BEAM SHOOT
                 didShoot = true;
 
-
+                //============INSTANTIATE POWER BEAM BASED ON DIRECTION===========\\
                 if (isPointingUp)
                     Instantiate(powerBeam, topShootPoint.position, topShootPoint.rotation);
                 else
@@ -48,9 +55,10 @@ public class PlayerAbilityController : MonoBehaviour
             else if (missileShoot.triggered && GameManager.Instance.missiles > 0)
             {
                 didShoot = true;
-                AnaliticsManager.Instance.AddMissileShoot();
+                AnaliticsManager.Instance.AddMissileShoot(); // LOG MISSILE SHOOT
                 GameManager.Instance.missiles--;
 
+                // INSTANTIATE MISSILE BASED ON DIRECTION
                 if (isPointingUp)
                     Instantiate(missile, topShootPoint.position, topShootPoint.rotation);
                 else
@@ -58,11 +66,13 @@ public class PlayerAbilityController : MonoBehaviour
             }
         }
 
+        //============START SHOOT ANIMATION===========\\
         if (didShoot)
         {
             StartShootingAnimation(isPointingUp, isMoving);
         }
 
+        //============UPDATE SHOOTING DIRECTION===========\\
         if (isShooting)
         {
             UpdateShootingDirection(isPointingUp, isMoving);
@@ -74,13 +84,13 @@ public class PlayerAbilityController : MonoBehaviour
         UpdateShootingDirection(isPointingUp, isMoving);
         isShooting = true;
 
-        CancelInvoke(nameof(StopShootAnimation));
-        Invoke(nameof(StopShootAnimation), 0.2f);
+        CancelInvoke(nameof(StopShootAnimation)); // CANCEL PREVIOUS STOP IF ACTIVE
+        Invoke(nameof(StopShootAnimation), 0.2f); // STOP SHOOT ANIMATION AFTER DELAY
     }
 
     private void UpdateShootingDirection(bool isPointingUp, bool isMoving)
     {
-        // Apagar todas las animaciones primero
+        // RESET ALL SHOOT ANIMATION STATES
         anim.SetBool("Shoot", false);
         anim.SetBool("ShootUpRun", false);
         anim.SetBool("ShootUpIdle", false);
@@ -89,6 +99,7 @@ public class PlayerAbilityController : MonoBehaviour
 
         var playerState = PlayerController.Instance.CurrentState;
 
+        // SET CORRECT SHOOTING ANIMATION BASED ON STATE AND INPUT
         if (playerState == PlayerController.STATES.ONAIR)
         {
             if (isPointingUp)
@@ -114,6 +125,7 @@ public class PlayerAbilityController : MonoBehaviour
 
     private void StopShootAnimation()
     {
+        // STOP ALL SHOOT ANIMATION STATES
         anim.SetBool("Shoot", false);
         anim.SetBool("ShootUpRun", false);
         anim.SetBool("ShootUpIdle", false);
